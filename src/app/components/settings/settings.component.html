@@ -1,0 +1,30 @@
+<div *ngIf="settings"
+     [ngClass]="{'hide-settings': hide}"
+     class="overlayer"></div>
+<div class="guess-screen"
+     *ngIf="settings"
+     [ngClass]="{'hide-settings': hide}">
+    <div class="close"
+         (click)="closeSettings()"></div>
+    <h2 class="heading">Settings</h2>
+    <div class="settings-option-wrap"
+         [ngClass]="{'fade-out-settings-content': hide}">
+        <app-settings-select name="mode"
+                             heading="MODE"
+                             description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque et imperdiet diam. Mauris id augue tincidunt, 
+                                 gravida tellus eget, cursus velit."
+                             [avaiableOptions]="gameSettings.game.options.mode"
+                             [option]="gameSettings.game.mode"
+                             (changeVal)="handleUpdateSettings($event)">
+        </app-settings-select>
+
+        <app-settings-select name="difficulty"
+                             heading="DIFFICULTY"
+                             description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque et imperdiet diam. Mauris id augue tincidunt, 
+                                 gravida tellus eget, cursus velit."
+                             [avaiableOptions]="gameSettings.game.options.difficulty"
+                             [option]="gameSettings.game.difficulty"
+                             (changeVal)="handleUpdateSettings($event)">
+        </app-settings-select>
+    </div>
+</div>
