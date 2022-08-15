@@ -1,0 +1,115 @@
+/* You can add global styles to this file, and also import other style files */
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap");
+
+$lightred: #ff5c5d;
+$darkred: #e24041;
+$white: #ffffff;
+$lightgrey: #ccc;
+$dark: #0d0d0d;
+
+* {
+  font-family: "Roboto", sans-serif;
+}
+
+@mixin flex($justify, $align, $dir: row) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;
+  flex-direction: $dir;
+}
+
+@mixin btn(
+  $pt,
+  $pr,
+  $pb,
+  $pl,
+  $br: 50px,
+  $bg: $lightred,
+  $bgh: $darkred,
+  $col: $white,
+  $fs: 1.2rem
+) {
+  border: none;
+  outline: none;
+  background-color: $bg;
+  color: $col;
+  border-radius: $br;
+  letter-spacing: 1px;
+  padding: $pt $pr $pb $pl;
+  font-weight: 100;
+  letter-spacing: 2px;
+  font-size: $fs;
+  position: relative;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  &::after {
+    position: absolute;
+    content: "";
+    width: 30%;
+    height: 100%;
+    right: 0;
+    top: 0;
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+    border-radius: 0 $br $br 0;
+    background-color: $bgh;
+    background-image: url("/assets/images/arrow-right.png");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 50%;
+  }
+  &:hover {
+    background-color: $bgh;
+    &::after {
+      animation: arrowAnimation 1.5s;
+      animation-iteration-count: infinite;
+      animation-fill-mode: forwards;
+    }
+  }
+}
+
+.full-size {
+  width: 100%;
+  height: 100%;
+}
+
+.wrap {
+  @extend .full-size;
+  @include flex(center, center, column);
+  position: absolute;
+  z-index: 2;
+}
+
+.logo {
+  background-image: url("/assets/images/logo.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center center;
+  width: 40%;
+  height: 20%;
+}
+
+@keyframes arrowAnimation {
+  0% {
+    background-position: 50%;
+  }
+  50% {
+    background-position: 0%;
+  }
+  75% {
+    background-position: 80%;
+  }
+  100% {
+    background-position: 50%;
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .box {
+    margin-top: 1rem;
+  }
+  .logo {
+    width: 75%;
+    height: 37.5%;
+  }
+}
