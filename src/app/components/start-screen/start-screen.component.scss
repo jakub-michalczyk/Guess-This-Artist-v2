@@ -1,0 +1,67 @@
+@use "/src/global/main";
+
+.box {
+  margin-top: 8rem;
+  .btn {
+    @include main.btn(
+      1.2rem,
+      6rem,
+      1.2rem,
+      3rem,
+      5px,
+      main.$lightred,
+      main.$darkred,
+      main.$white,
+      1rem
+    );
+    background-image: url("/assets/images/arrow-right.png");
+    background-size: 50px;
+    background-position: 90% center;
+    background-repeat: no-repeat;
+  }
+}
+
+.bg {
+  @extend .full-size;
+  position: relative;
+  background-image: url("/assets/images/bg.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  &::after {
+    @extend .full-size;
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .logo {
+    width: 55%;
+    height: 30%;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .logo {
+    width: 65%;
+    height: 35%;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .logo {
+    width: 50%;
+    height: 25%;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .logo {
+    width: 40%;
+    height: 20%;
+  }
+}
