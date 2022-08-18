@@ -2,10 +2,9 @@
      <div class="wrap">
           <div class="settings"
                (click)="changeSettings()"></div>
-
           <div class="logo"></div>
           <div class="box"
-               routerLink="/guess">
+               (click)="startGame()">
                <button class="btn">Let's Guess!</button>
           </div>
           <app-settings class="settings-wrap"

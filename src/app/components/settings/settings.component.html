@@ -18,12 +18,21 @@
                              (changeVal)="handleUpdateSettings($event)">
         </app-settings-select>
 
-        <app-settings-select name="difficulty"
-                             heading="DIFFICULTY"
+        <app-settings-select name="nationality"
+                             heading="NATIONALITY"
                              description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque et imperdiet diam. Mauris id augue tincidunt, 
-                                 gravida tellus eget, cursus velit."
-                             [avaiableOptions]="gameSettings.game.options.difficulty"
-                             [option]="gameSettings.game.difficulty"
+                                gravida tellus eget, cursus velit."
+                             [avaiableOptions]="gameSettings.game.options.nationality"
+                             [option]="gameSettings.game.nationality"
+                             (changeVal)="handleUpdateSettings($event)">
+        </app-settings-select>
+
+        <app-settings-select name="artist"
+                             heading="ARTIST"
+                             description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque et imperdiet diam. Mauris id augue tincidunt, 
+           gravida tellus eget, cursus velit."
+                             [avaiableOptions]="artists"
+                             [option]="gameSettings.game.artist"
                              (changeVal)="handleUpdateSettings($event)">
         </app-settings-select>
     </div>

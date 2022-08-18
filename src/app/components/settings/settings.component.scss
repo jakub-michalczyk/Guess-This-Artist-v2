@@ -16,7 +16,7 @@
   animation: showSettings 0.1s;
   animation-fill-mode: forwards;
   overflow-x: hidden;
-  overflow-y: hidden;
+  overflow-y: scroll;
   padding: 0 2%;
   -webkit-box-shadow: -6px 4px 25px 0px rgba(226, 64, 65, 0.12);
   box-shadow: -6px 4px 25px 0px rgba(226, 64, 65, 0.12);
@@ -29,7 +29,7 @@
 
   &::-webkit-scrollbar {
     border-radius: 50px;
-    width: 15px;
+    width: 5px;
     background-color: main.$dark;
   }
 
@@ -193,10 +193,6 @@
     to {
       width: 0%;
     }
-  }
-
-  .guess-screen {
-    overflow-y: hidden;
   }
 }
 

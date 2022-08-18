@@ -29,4 +29,13 @@ export class SettingsComponent {
   get gameSettings() {
     return this.gameService;
   }
+
+  get artists(): string[] {
+    let allArtists: string[] = [];
+    this.gameSettings.game.options.artist.forEach((artist) =>
+      allArtists.push(artist.name)
+    );
+
+    return allArtists;
+  }
 }

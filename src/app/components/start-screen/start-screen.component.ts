@@ -1,4 +1,15 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { GameService } from 'src/global/game.service';
+
+interface ApiData {
+  data: Datson[];
+}
+
+interface Datson {
+  preview: string;
+}
 
 @Component({
   selector: 'app-start-screen',
@@ -7,11 +18,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StartScreenComponent implements OnInit {
   settingsOn = false;
-  constructor() {}
+  constructor(
+    private http: HttpClient,
+    private gameService: GameService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {}
 
   changeSettings() {
     this.settingsOn = !this.settingsOn;
+  }
+
+  startGame() {
+    this.router.navigate(['/guess']);
   }
 }

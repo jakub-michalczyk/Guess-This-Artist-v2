@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { ARTISTS } from './artists';
 import { Game } from './interfaces';
 
 @Injectable({
@@ -9,20 +10,23 @@ export class GameService {
 
   constructor() {
     this.game = {
-      mode: 'lyrics',
-      difficulty: 'normal',
+      mode: 'music',
       genre: 'rap',
-      similarity: 'normal',
-      nationality: 'custom',
-      artists: [],
+      nationality: 'International',
+      artist: 'Random',
       length: 150,
+      lifes: [
+        { exists: true },
+        { exists: true },
+        { exists: true },
+        { exists: true },
+        { exists: true },
+      ],
       options: {
         mode: ['lyrics', 'music'],
-        difficulty: ['easy', 'normal', 'hard', 'custom'],
-        similarity: ['poor', 'normal', 'great'],
-        length: ['short', 'normal', 'long'],
         genre: ['rap', 'pop', 'rock'],
-        nationality: ['poland', 'usa', 'custom'],
+        nationality: ['polish', 'international'],
+        artist: ARTISTS,
       },
     };
   }
