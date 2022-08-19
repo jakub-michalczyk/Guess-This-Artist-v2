@@ -1,0 +1,41 @@
+@use "/src/global/main";
+
+.overlayer {
+  width: 100%;
+  position: absolute;
+  height: 100%;
+  z-index: 99;
+  background-color: main.$dark_opacity;
+  overflow: hidden;
+  transition: height 0.3s;
+}
+
+.countdown {
+  @include main.flex(center, center);
+  font-size: 10rem;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 100;
+  color: main.$darkred;
+  font-family: "Bungee Inline", cursive;
+  animation: countdown 2s;
+  animation-iteration-count: infinite;
+  animation-fill-mode: forwards;
+}
+
+.hide {
+  height: 0;
+}
+
+@keyframes countdown {
+  0% {
+    font-size: 10rem;
+  }
+  50% {
+    font-size: 20rem;
+  }
+  100% {
+    font-size: 10rem;
+  }
+}

@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ARTISTS } from 'src/global/artists';
 import { GameService } from 'src/global/game.service';
@@ -38,6 +38,7 @@ export class GuessScreenComponent implements OnInit {
     { type: 'artist', data: [] },
     { type: 'song', data: [] },
   ];
+  @Input() countdownEnded = false;
   artistData = {} as Artist;
   @ViewChild('artistName') artistName!: ElementRef<HTMLInputElement>;
   @ViewChild('songName') songName!: ElementRef<HTMLInputElement>;
@@ -61,9 +62,17 @@ export class GuessScreenComponent implements OnInit {
     this.trackData = data.data[random];
     this.track.src = this.trackData.preview;
     this.track.volume = 0.3;
+
+    if (this.countdownEnded) {
+      this.start();
+    }
+
+    this.artistData = this.trackData.artist;
+  }
+
+  start() {
     this.track.play();
     this.startCountdown();
-    this.artistData = this.trackData.artist;
   }
 
   errorHandling() {

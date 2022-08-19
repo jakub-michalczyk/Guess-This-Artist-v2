@@ -1,5 +1,7 @@
 <app-loading-screen [hideLoadingScreen]="hideLoading"></app-loading-screen>
 
+<app-countdown (countdownEnded)="start()"></app-countdown>
+
 <div class="bg">
     <div class="wrap guess-screen-wrap">
         <div class="main">
