@@ -1,0 +1,96 @@
+@use "/src/global/main";
+
+.box {
+  margin-top: 8rem;
+  .btn {
+    $border-radius: 5px;
+    @include main.btn(
+      1.2rem,
+      6rem,
+      1.2rem,
+      3rem,
+      $border-radius,
+      main.$lightred,
+      main.$darkred,
+      main.$white,
+      1rem
+    );
+    background-image: url("/assets/images/arrow-right.png");
+    background-size: 50px;
+    background-position: 90% center;
+    background-repeat: no-repeat;
+    &::after {
+      background-image: url("/assets/images/arrow-right.png");
+    }
+    &:hover {
+      &::after {
+        animation: arrowAnimation 1.5s;
+      }
+    }
+  }
+}
+
+.settings-wrap {
+  z-index: 3;
+}
+
+.settings {
+  position: absolute;
+  width: 100%;
+  min-height: 5%;
+  z-index: 3;
+  top: 3%;
+  right: 2%;
+  background-image: url("/assets/images/settings.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: 100% center;
+  cursor: pointer;
+  transition: opacity 0.6s;
+  &:hover {
+    opacity: 0.5;
+  }
+}
+
+@keyframes arrowAnimation {
+  0% {
+    background-position: 50%;
+  }
+  50% {
+    background-position: 0%;
+  }
+  75% {
+    background-position: 80%;
+  }
+  100% {
+    background-position: 50%;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .logo {
+    width: 55%;
+    height: 30%;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .logo {
+    width: 65%;
+    height: 35%;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .logo {
+    width: 50%;
+    height: 25%;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .logo {
+    width: 40%;
+    height: 20%;
+  }
+}

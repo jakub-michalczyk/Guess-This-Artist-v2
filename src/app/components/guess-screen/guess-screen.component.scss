@@ -1,0 +1,183 @@
+@use "/src/global/main";
+
+.unknown {
+  background-image: url("/assets/images/unknown.jpg");
+  width: 400px;
+  height: 400px;
+  background-position: center center;
+  background-repeat: no-repeat;
+  border: 2px solid main.$lightred;
+  outline: 2px solid main.$lightred;
+  outline-offset: 4px;
+  position: relative;
+}
+
+.timer {
+  position: absolute;
+  top: -15%;
+  left: -15%;
+  color: main.$white;
+  font-size: 5rem;
+  letter-spacing: 5px;
+  transform: rotate(-15deg);
+  font-family: "Holtwood One SC", serif;
+}
+
+.guess-screen-wrap {
+  @include main.flex(center, flex-start);
+  padding-top: 10%;
+}
+
+.main {
+  @include main.flex(center, center, column);
+  margin-top: 2.5%;
+  .lifes-wrap {
+    @include main.flex(space-between, center);
+    width: 400px;
+    margin-top: 5%;
+  }
+}
+
+.inputs-wrap {
+  @include main.flex(center, center, column);
+  margin-left: 10%;
+}
+
+.track {
+  margin-top: 5%;
+  width: 414px;
+  height: 4px;
+  background-color: main.$white;
+  .progress {
+    animation: progress 30s;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+    width: 100%;
+    height: 100%;
+    background-color: main.$darkred;
+    transition: width 0.3s;
+  }
+}
+
+.form-group {
+  @include main.flex(center, center);
+  width: 400px;
+  box-sizing: content-box;
+  position: relative;
+  padding-top: 1.3rem;
+  color: main.$white;
+  margin: 5% 0;
+  .input {
+    position: relative;
+    padding: 10px 5px;
+    width: 75%;
+    background: transparent;
+    border: 1px solid main.$darkred;
+    outline: none;
+    color: main.$white;
+    &::placeholder {
+      color: main.$lightgrey;
+    }
+  }
+  .input-btn {
+    color: main.$white;
+    background-color: main.$darkred;
+    width: 25%;
+    padding: 10px;
+    border: 1px solid main.$darkred;
+    cursor: pointer;
+  }
+  .label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 0.8rem;
+  }
+  .list {
+    background-color: main.$darkred;
+    color: main.$white;
+    padding: 10px;
+    box-sizing: border-box;
+    margin: 0;
+    list-style: none;
+    position: absolute;
+    bottom: -155px;
+    z-index: 2;
+    width: 400px;
+    height: 150px;
+    overflow-y: auto;
+    .list-element {
+      padding: 10px;
+      font-size: 0.8rem;
+      border-bottom: 1px solid main.$lightgrey;
+      cursor: pointer;
+      &:hover {
+        background-color: main.$lightred;
+      }
+    }
+  }
+  .close-list {
+    position: absolute;
+    bottom: -190px;
+    background-color: main.$lightred;
+    color: main.$white;
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    font-weight: bold;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    text-align: center;
+    cursor: pointer;
+    display: block;
+    border: none;
+    outline: none;
+  }
+}
+
+.btn-wrap {
+  width: 100%;
+  .guess-btn {
+    @include main.btn(
+      1.2rem,
+      6rem,
+      1.2rem,
+      3rem,
+      5px,
+      main.$lightred,
+      main.$darkred,
+      main.$white,
+      1rem
+    );
+    &::after {
+      background-image: url("/assets/images/question-mark.png");
+    }
+  }
+}
+
+@keyframes progress {
+  from {
+    width: 100%;
+  }
+  to {
+    width: 0%;
+  }
+}
+
+@keyframes questionMarkAnimation {
+  0% {
+    transform: scale(1) rotate(0);
+  }
+  25% {
+    transform: scale(1.2) rotate(10deg);
+  }
+  50% {
+    transform: scale(1.4) rotate(20deg);
+  }
+  75% {
+    transform: scale(1.2) rotate(10deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+}

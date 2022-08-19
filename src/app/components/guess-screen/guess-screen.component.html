@@ -1,0 +1,110 @@
+<app-loading-screen [hideLoadingScreen]="hideLoading"></app-loading-screen>
+
+<div class="bg">
+    <div class="wrap guess-screen-wrap">
+        <div class="main">
+            <div class="unknown">
+                <div class="timer">
+                    {{ timerObj.minutes < 10
+                      ?
+                      ('0'
+                      +
+                      timerObj.minutes)
+                      :
+                      timerObj.minutes
+                      }}:{{
+                      timerObj.seconds
+                      <
+                      10
+                      ? '0'
+                      +
+                      timerObj.seconds
+                      :
+                      timerObj.seconds
+                      }}
+                      </div>
+                </div>
+                <div class="track">
+                    <div class="progress"></div>
+                </div>
+                <div class="lifes-wrap">
+                    <div *ngFor="let life of lifes">
+                        <img src="/assets/images/heart.png" />
+                    </div>
+                </div>
+            </div>
+            <div class="inputs-wrap">
+                <ng-container *ngFor="let fieldGroupData of fields">
+                    <ng-container [ngTemplateOutlet]="fieldGroup"
+                                  [ngTemplateOutletContext]="{ $implicit: fieldGroupData }"></ng-container>
+                </ng-container>
+                <div class="btn-wrap">
+                    <button (click)="checkGuess()"
+                            class="guess-btn">Guess</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <ng-template let-value
+                 #fieldGroup>
+
+        <div class="form-group">
+            <ng-container [ngSwitch]="value.type">
+
+                <!-- artist -->
+                <ng-container *ngSwitchCase="'artist'">
+                    <input #artistName
+                           type="input"
+                           class="input"
+                           placeholder="Name"
+                           name="name"
+                           id='name'
+                           required />
+                </ng-container>
+
+                <!-- song -->
+                <ng-container *ngSwitchCase="'song'">
+                    <input #songName
+                           type="input"
+                           class="input"
+                           placeholder="Name"
+                           name="name"
+                           id='name'
+                           required />
+                </ng-container>
+            </ng-container>
+            <ng-container [ngSwitch]="value.type">
+                <button *ngSwitchCase="'artist'"
+                        (click)="validateArtists(value.data)"
+                        class="input-btn">Check</button>
+
+                <button *ngSwitchCase="'song'"
+                        (click)="validateSongs(value.data)"
+                        class="input-btn">Check</button>
+            </ng-container>
+
+            <label for="name"
+                   class="label">{{value.type === 'song' ? 'Song' : 'Artist'}} name</label>
+
+            <ng-container *ngIf="!!value.data?.length">
+                <ul class="list">
+                    <ng-container [ngSwitch]="value.type">
+                        <ng-container *ngSwitchCase="'artist'">
+                            <li (click)="chooseArtist(dataElem)"
+                                class="list-element"
+                                *ngFor="let dataElem of value.data">{{dataElem.name}}</li>
+                        </ng-container>
+
+                        <ng-container *ngSwitchCase="'song'">
+                            <li (click)="chooseSong(dataElem)"
+                                class="list-element"
+                                *ngFor="let dataElem of value.data">{{dataElem}}</li>
+                        </ng-container>
+                    </ng-container>
+
+                </ul>
+                <button (click)="closeHintList(value.type)"
+                        class="close-list">Close</button>
+            </ng-container>
+        </div>
+    </ng-template>
