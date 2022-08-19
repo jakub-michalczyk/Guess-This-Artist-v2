@@ -29,6 +29,7 @@ export class GuessScreenComponent implements OnInit {
     minutes: 0,
     seconds: 30,
   };
+  hideLoading = false;
   artist = ARTISTS;
   timerInterval = 0;
   private track = new Audio();
@@ -43,13 +44,12 @@ export class GuessScreenComponent implements OnInit {
 
   ngOnInit() {
     this.activatedRoute.data.subscribe(({ data }) => {
-      console.log(data);
       let isError = data as ErrorFallback;
 
       if (isError.error) {
-        console.log(isError);
         return this.errorHandling();
       } else {
+        this.hideLoadingScreen();
         return this.init(data);
       }
     });
@@ -74,9 +74,14 @@ export class GuessScreenComponent implements OnInit {
         return this.errorHandling();
       } else {
         let fallback = data as FallbackData;
+        this.hideLoadingScreen();
         return this.init(fallback);
       }
     });
+  }
+
+  hideLoadingScreen() {
+    this.hideLoading = true;
   }
 
   startCountdown() {
