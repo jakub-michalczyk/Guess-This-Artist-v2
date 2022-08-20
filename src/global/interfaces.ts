@@ -19,6 +19,7 @@ export interface Artist {
   name: string;
   genre?: ('Rap' | 'Rock' | 'Pop' | 'R&B')[];
   nationality?: 'polish' | 'international';
+  image?: string;
 }
 
 export interface Song {

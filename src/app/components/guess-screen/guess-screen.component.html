@@ -5,7 +5,8 @@
 <div class="bg">
     <div class="wrap guess-screen-wrap">
         <div class="main">
-            <div class="unknown">
+            <div #imageContainer
+                 class="unknown">
                 <div class="timer">
                     {{ timerObj.minutes < 10
                       ?
@@ -26,11 +27,19 @@
                       }}
                       </div>
                 </div>
+                <div class="guessed-data"
+                     *ngIf="guessed">
+                    <span class="artist-name">{{artistData.name}} - </span>
+                    <span class="song-title">{{trackData.title}}</span>
+                </div>
                 <div class="track">
-                    <div class="progress"></div>
+                    <div #progressTrack
+                         class="progress"
+                         [ngClass]="{'progress-running': timerInterval}"></div>
                 </div>
                 <div class="lifes-wrap">
-                    <div *ngFor="let life of lifes">
+                    <div *ngFor="let life of lifes"
+                         [ngClass]="{'no-life': !life.exists}">
                         <img src="/assets/images/heart.png" />
                     </div>
                 </div>
@@ -83,6 +92,11 @@
                 <button *ngSwitchCase="'song'"
                         (click)="validateSongs(value.data)"
                         class="input-btn">Check</button>
+
+                <img *ngIf="value.data.length > 0"
+                     class="remove-hint-list"
+                     src="/assets/images/close.png"
+                     (click)="closeHintList(value.type)" />
             </ng-container>
 
             <label for="name"
@@ -105,8 +119,6 @@
                     </ng-container>
 
                 </ul>
-                <button (click)="closeHintList(value.type)"
-                        class="close-list">Close</button>
             </ng-container>
         </div>
     </ng-template>

@@ -9,43 +9,58 @@ export const ARTISTS: Artist[] = [
     genre: ['Rap'],
     name: 'Eminem',
     nationality: 'international',
+    image:
+      'https://e-cdns-images.dzcdn.net/images/artist/19cc38f9d69b352f718782e7a22f9c32/500x500-000000-80-0-0.jpg',
   },
   {
     id: 3,
     genre: ['Rap'],
     name: 'Snoop Dogg',
     nationality: 'international',
+    image:
+      'https://e-cdns-images.dzcdn.net/images/artist/a423dd42b7394eeacc882be8ac633eee/500x500-000000-80-0-0.jpg',
   },
   {
     id: 1309,
     genre: ['Rap'],
-    name: 'Jay-Z',
+    name: 'JAY-Z',
     nationality: 'international',
+    image:
+      'https://e-cdns-images.dzcdn.net/images/artist/90fab088c4d091618e7386f688803673/500x500-000000-80-0-0.jpg',
   },
   {
     id: 246791,
     genre: ['Rap'],
     name: 'Drake',
     nationality: 'international',
+    image:
+      'https://e-cdns-images.dzcdn.net/images/artist/5d2fa7f140a6bdc2c864c3465a61fc71/500x500-000000-80-0-0.jpg',
   },
   {
     id: 230,
     genre: ['Rap'],
     name: 'Kanye West',
     nationality: 'international',
+    image:
+      'https://e-cdns-images.dzcdn.net/images/artist/bb76c2ee3b068726ab4c37b0aabdb57a/500x500-000000-80-0-0.jpg',
   },
   {
     id: 74309,
     genre: ['Rap'],
     name: 'Lil Wayne',
     nationality: 'international',
+    image:
+      'https://e-cdns-images.dzcdn.net/images/artist/2342b756645ad50f80215785d218bca8/500x500-000000-80-0-0.jpg',
   },
   {
     id: 64333,
     genre: ['Rap'],
     name: 'Flo Rida',
     nationality: 'international',
+    image:
+      'https://e-cdns-images.dzcdn.net/images/artist/99386bbd6963abb7da4f713c8a6411ff/500x500-000000-80-0-0.jpg',
   },
+
   {
     id: 125278382,
     genre: ['Rap'],

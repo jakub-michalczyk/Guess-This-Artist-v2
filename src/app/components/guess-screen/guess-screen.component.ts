@@ -32,8 +32,9 @@ export class GuessScreenComponent implements OnInit {
   hideLoading = false;
   artist = ARTISTS;
   timerInterval = 0;
+  guessed = false;
   private track = new Audio();
-  private trackData = {} as TrackData;
+  trackData = {} as TrackData;
   fields: GuessField[] = [
     { type: 'artist', data: [] },
     { type: 'song', data: [] },
@@ -42,6 +43,8 @@ export class GuessScreenComponent implements OnInit {
   artistData = {} as Artist;
   @ViewChild('artistName') artistName!: ElementRef<HTMLInputElement>;
   @ViewChild('songName') songName!: ElementRef<HTMLInputElement>;
+  @ViewChild('imageContainer') imageContainer!: ElementRef<HTMLDivElement>;
+  @ViewChild('progressTrack') progressTrack!: ElementRef<HTMLDivElement>;
 
   ngOnInit() {
     this.activatedRoute.data.subscribe(({ data }) => {
@@ -107,12 +110,18 @@ export class GuessScreenComponent implements OnInit {
   validateSongs(data: string[]) {
     this.requestService.getSimiliarSongs(this.songNameValue).then((dataObs) => {
       dataObs?.subscribe((songs) => {
-        let songsData = songs as SongsData;
-        songsData.data.forEach((song) => {
-          if (!data.includes(song.title)) {
-            data.push(song.title);
-          }
-        });
+        let isError = songs as ErrorFallback;
+
+        if (isError.error) {
+          return this.validateSongs(data);
+        } else {
+          let songsData = songs as SongsData;
+          songsData.data.forEach((song) => {
+            if (!data.includes(song.title)) {
+              data.push(song.title);
+            }
+          });
+        }
       });
     });
   }
@@ -121,7 +130,9 @@ export class GuessScreenComponent implements OnInit {
     this.artist.forEach((artist) => {
       if (this.artistNameValue) {
         if (
-          artist.name.toLowerCase().includes(this.artistNameValue) ||
+          artist.name
+            .toLowerCase()
+            .includes(this.artistNameValue.toLowerCase()) ||
           artist.name
             .replace(/[^a-zA-Z ]/g, '')
             .toLowerCase()
@@ -135,14 +146,49 @@ export class GuessScreenComponent implements OnInit {
 
   checkGuess() {
     if (
-      this.artistNameValue === this.trackData.artist.name &&
-      this.songNameValue === this.trackData.title
+      this.artistNameValue?.toLowerCase() ===
+        this.artistData.name.toLowerCase() &&
+      this.songNameValue?.toLowerCase() === this.trackData.title.toLowerCase()
     ) {
-      alert('You Guessed!');
+      this.correctGuess();
     } else {
-      alert("Oh, you didn't guessed");
-      console.log(this.trackData.artist.name, this.trackData.title);
+      let failureSound = new Audio();
+      let lifes = this.gameService.game.lifes;
+      let length = this.gameService.game.lifes.length;
+
+      failureSound.src = 'assets/audio/failure.mp3';
+
+      for (let i = length - 1; i >= 0; i--) {
+        if (lifes[i].exists) {
+          lifes[i].exists = false;
+          break;
+        }
+      }
+
+      failureSound.play();
+
+      if (this.lifes.every((life) => !life.exists)) {
+        return this.gameOver();
+      }
     }
+  }
+
+  gameOver() {
+    alert('Game Over!');
+  }
+
+  correctGuess() {
+    let correctSound = new Audio();
+
+    correctSound.src = 'assets/audio/correct.mp3';
+    window.clearInterval(this.timerInterval);
+
+    this.guessed = true;
+    this.track.pause();
+    correctSound.play();
+    this.progressTrack.nativeElement.style.width = `${this.progressTrack.nativeElement.clientWidth}px`;
+    this.progressTrack.nativeElement.classList.remove('progress-running');
+    this.imageContainer.nativeElement.style.backgroundImage = `url(${this.moreArtistData.image})`;
   }
 
   closeHintList(type: 'artist' | 'song') {
@@ -167,5 +213,9 @@ export class GuessScreenComponent implements OnInit {
 
   get lifes() {
     return this.gameService.game.lifes;
+  }
+
+  get moreArtistData() {
+    return this.artist.find((artist) => artist.name === this.artistData.name)!;
   }
 }
