@@ -505,4 +505,10 @@ export const ARTISTS: Artist[] = [
     name: 'D12',
     nationality: 'international',
   },
+  {
+    id: 177098,
+    genre: ['Rap'],
+    name: 'Sentino',
+    nationality: 'polish',
+  },
 ];

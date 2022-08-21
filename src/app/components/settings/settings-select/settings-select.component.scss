@@ -12,22 +12,21 @@
   margin: 3% 0;
   border-bottom: 1px solid main.$darkred;
   p {
-    @include main.flex(center, center);
+    @include main.flex(center, flex-start);
     font-weight: 300;
     color: main.$lightgrey;
     font-size: 0.8rem;
     line-height: 1.3rem;
-    margin-left: 5%;
+    margin-left: 2.5%;
     margin-top: 0;
+
     &::before {
-      position: relative;
-      top: 0;
-      left: 0;
-      width: 20px;
-      height: 30px;
       content: "";
-      margin-right: 5%;
-      background: main.$darkred;
+      display: block;
+      border-left: 8px solid main.$darkred;
+      padding-left: 10px;
+      width: 10px;
+      height: 20px;
     }
   }
   select {

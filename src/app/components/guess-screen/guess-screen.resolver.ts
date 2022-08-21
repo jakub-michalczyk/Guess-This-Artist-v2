@@ -17,6 +17,6 @@ export class GuessScreenResolver implements Resolve<Object> {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<Object> | Promise<Object> | Object {
-    return this.requestService.getTrack(this.artist);
+    return this.requestService.getTrack();
   }
 }

@@ -118,7 +118,7 @@ export class GuessScreenComponent implements OnInit, OnDestroy {
   }
 
   errorHandling() {
-    this.requestService.getTrack(this.artist).subscribe((data) => {
+    this.requestService.getTrack().subscribe((data) => {
       let isError = data as ErrorFallback;
 
       if (isError.error) {

@@ -10,9 +10,8 @@ export class GameService {
 
   constructor() {
     this.game = {
-      mode: 'music',
-      genre: 'rap',
-      nationality: 'International',
+      genre: 'Rap',
+      nationality: 'international',
       artist: 'Random',
       length: 150,
       score: 0,
