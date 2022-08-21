@@ -191,6 +191,59 @@
       background-image: url("/assets/images/question-mark.png");
     }
   }
+  .next-artist-btn {
+    &::after {
+      background-image: url("/assets/images/arrow-right.png");
+    }
+    &:hover {
+      &::after {
+        animation: arrowAnimation 1.5s;
+      }
+    }
+  }
+}
+
+.game-over-overlayer {
+  @include main.flex(center, center, column);
+  top: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  height: 0;
+  transition: height 0.3s;
+  position: absolute;
+  z-index: 99;
+  background-color: main.$dark_opacity;
+  .btn {
+    @extend .btn;
+    margin-top: 15%;
+  }
+}
+
+.game-over-overlayer-full {
+  height: 100%;
+}
+
+.lost-heading {
+  @include main.flex(center, center, column);
+  color: main.$white;
+  font-size: 3rem;
+  margin: 2rem 0 0 0;
+  .lost-info {
+    font-family: "Nunito", sans-serif;
+    color: main.$white;
+  }
+  .score-info {
+    color: main.$lightgrey;
+    font-size: 1.5rem;
+  }
+}
+
+input:disabled,
+button:disabled,
+label[data-disabled="true"] {
+  opacity: 0.3;
+  cursor: default !important;
 }
 
 @keyframes progress {

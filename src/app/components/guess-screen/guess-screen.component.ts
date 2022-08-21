@@ -1,5 +1,12 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {
+  Component,
+  ElementRef,
+  Input,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ARTISTS } from 'src/global/artists';
 import { GameService } from 'src/global/game.service';
 import {
@@ -18,11 +25,12 @@ import { RequestService } from 'src/global/request.service';
   templateUrl: './guess-screen.component.html',
   styleUrls: ['./guess-screen.component.scss'],
 })
-export class GuessScreenComponent implements OnInit {
+export class GuessScreenComponent implements OnInit, OnDestroy {
   constructor(
     private activatedRoute: ActivatedRoute,
     private gameService: GameService,
-    private requestService: RequestService
+    private requestService: RequestService,
+    private router: Router
   ) {}
 
   timerObj: Timer = {
@@ -45,6 +53,7 @@ export class GuessScreenComponent implements OnInit {
   @ViewChild('songName') songName!: ElementRef<HTMLInputElement>;
   @ViewChild('imageContainer') imageContainer!: ElementRef<HTMLDivElement>;
   @ViewChild('progressTrack') progressTrack!: ElementRef<HTMLDivElement>;
+  @ViewChild('gameOver') gameOverOverlayer!: ElementRef<HTMLDivElement>;
 
   ngOnInit() {
     this.activatedRoute.data.subscribe(({ data }) => {
@@ -57,6 +66,10 @@ export class GuessScreenComponent implements OnInit {
         return this.init(data);
       }
     });
+  }
+
+  ngOnDestroy(): void {
+    this.track.pause();
   }
 
   init(data: FallbackData) {
@@ -174,20 +187,27 @@ export class GuessScreenComponent implements OnInit {
   }
 
   gameOver() {
-    alert('Game Over!');
+    this.stopGame('/assets/audio/gameover.mp3');
+    this.guessed = false;
+    this.gameOverOverlayer.nativeElement.className +=
+      ' game-over-overlayer-full';
   }
 
-  correctGuess() {
-    let correctSound = new Audio();
+  stopGame(audioSrc: string) {
+    let audio = new Audio();
 
-    correctSound.src = 'assets/audio/correct.mp3';
+    audio.src = audioSrc;
+    audio.play();
     window.clearInterval(this.timerInterval);
 
     this.guessed = true;
     this.track.pause();
-    correctSound.play();
     this.progressTrack.nativeElement.style.width = `${this.progressTrack.nativeElement.clientWidth}px`;
     this.progressTrack.nativeElement.classList.remove('progress-running');
+  }
+
+  correctGuess() {
+    this.stopGame('assets/audio/correct.mp3');
     this.imageContainer.nativeElement.style.backgroundImage = `url(${this.moreArtistData.image})`;
   }
 

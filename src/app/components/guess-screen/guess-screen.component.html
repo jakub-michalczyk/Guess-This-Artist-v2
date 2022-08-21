@@ -8,7 +8,8 @@
             <div #imageContainer
                  class="unknown">
                 <div class="timer">
-                    {{ timerObj.minutes < 10
+                    {{
+                    timerObj.minutes < 10
                       ?
                       ('0'
                       +
@@ -51,11 +52,24 @@
                 </ng-container>
                 <div class="btn-wrap">
                     <button (click)="checkGuess()"
-                            class="guess-btn">Guess</button>
+                            [ngClass]="{'next-artist-btn': guessed}"
+                            class="guess-btn">{{ !guessed ? 'Guess' : 'Next Artist'}}</button>
                 </div>
             </div>
         </div>
     </div>
+
+    <div #gameOver
+         class="game-over-overlayer">
+        <h1 class="lost-heading">
+            <span class="lost-info">You lost 😔</span>
+            <span class="score-info">
+                Your score is <span>19 points</span>
+            </span>
+            <button class="btn">Guess Again!</button>
+        </h1>
+    </div>
+
     <ng-template let-value
                  #fieldGroup>
 
@@ -64,7 +78,8 @@
 
                 <!-- artist -->
                 <ng-container *ngSwitchCase="'artist'">
-                    <input #artistName
+                    <input [disabled]="guessed"
+                           #artistName
                            type="input"
                            class="input"
                            placeholder="Name"
@@ -75,7 +90,8 @@
 
                 <!-- song -->
                 <ng-container *ngSwitchCase="'song'">
-                    <input #songName
+                    <input [disabled]="guessed"
+                           #songName
                            type="input"
                            class="input"
                            placeholder="Name"
@@ -86,10 +102,12 @@
             </ng-container>
             <ng-container [ngSwitch]="value.type">
                 <button *ngSwitchCase="'artist'"
+                        [disabled]="guessed"
                         (click)="validateArtists(value.data)"
                         class="input-btn">Check</button>
 
                 <button *ngSwitchCase="'song'"
+                        [disabled]="guessed"
                         (click)="validateSongs(value.data)"
                         class="input-btn">Check</button>
 
@@ -99,7 +117,8 @@
                      (click)="closeHintList(value.type)" />
             </ng-container>
 
-            <label for="name"
+            <label [attr.data-disabled]="guessed"
+                   for="name"
                    class="label">{{value.type === 'song' ? 'Song' : 'Artist'}} name</label>
 
             <ng-container *ngIf="!!value.data?.length">

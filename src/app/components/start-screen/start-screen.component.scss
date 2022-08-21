@@ -2,32 +2,6 @@
 
 .box {
   margin-top: 8rem;
-  .btn {
-    $border-radius: 5px;
-    @include main.btn(
-      1.2rem,
-      6rem,
-      1.2rem,
-      3rem,
-      $border-radius,
-      main.$lightred,
-      main.$darkred,
-      main.$white,
-      1rem
-    );
-    background-image: url("/assets/images/arrow-right.png");
-    background-size: 50px;
-    background-position: 90% center;
-    background-repeat: no-repeat;
-    &::after {
-      background-image: url("/assets/images/arrow-right.png");
-    }
-    &:hover {
-      &::after {
-        animation: arrowAnimation 1.5s;
-      }
-    }
-  }
 }
 
 .settings-wrap {
@@ -49,21 +23,6 @@
   transition: opacity 0.6s;
   &:hover {
     opacity: 0.5;
-  }
-}
-
-@keyframes arrowAnimation {
-  0% {
-    background-position: 50%;
-  }
-  50% {
-    background-position: 0%;
-  }
-  75% {
-    background-position: 80%;
-  }
-  100% {
-    background-position: 50%;
   }
 }
 
