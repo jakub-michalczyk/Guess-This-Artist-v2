@@ -7,6 +7,7 @@ import {
   Renderer2,
   ViewChild,
 } from '@angular/core';
+import { CountdownService } from 'src/global/countdown.service';
 
 @Component({
   selector: 'app-countdown',
@@ -20,18 +21,44 @@ export class CountdownComponent implements OnInit {
   @ViewChild('countdownRef') countdownRef!: ElementRef<HTMLDivElement>;
   @ViewChild('overlayerRef') overlayerRef!: ElementRef<HTMLDivElement>;
   @Output() countdownEnded = new EventEmitter<boolean>();
-  constructor(private renderer: Renderer2) {}
+  constructor(
+    private renderer: Renderer2,
+    private countdownService: CountdownService
+  ) {}
 
   ngOnInit(): void {
+    this.countdownService.needsRestart.subscribe((restart) => {
+      if (restart) {
+        this.countdown = 3;
+        this.flag = false;
+        this.renderer.appendChild(
+          this.overlayerRef.nativeElement,
+          this.countdownRef.nativeElement
+        );
+        this.init();
+        return this.countdownService.restarted();
+      }
+    });
+
+    this.init();
+  }
+
+  init() {
     let audio = new Audio();
     audio.src = '/assets/audio/countdown.mp3';
     audio.play();
     this.countdownInterval = window.setInterval(() => {
       if (this.countdown <= 0) {
-        this.renderer.removeChild(
-          this.overlayerRef.nativeElement,
+        if (
+          this.overlayerRef.nativeElement &&
           this.countdownRef.nativeElement
-        );
+        ) {
+          this.renderer.removeChild(
+            this.overlayerRef.nativeElement,
+            this.countdownRef.nativeElement
+          );
+        }
+
         setTimeout(() => {
           this.flag = true;
           this.countdownEnded.emit(true);

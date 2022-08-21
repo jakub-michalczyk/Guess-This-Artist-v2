@@ -2,6 +2,7 @@ export interface Game {
   [setting: string]: string | number | string[] | Life[] | Option;
   mode: string;
   lifes: Life[];
+  score: number;
   genre: string;
   options: Option;
   length: number;

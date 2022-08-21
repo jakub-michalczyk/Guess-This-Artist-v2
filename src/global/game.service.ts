@@ -15,6 +15,7 @@ export class GameService {
       nationality: 'International',
       artist: 'Random',
       length: 150,
+      score: 0,
       lifes: [
         { exists: true },
         { exists: true },

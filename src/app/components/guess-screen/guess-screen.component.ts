@@ -8,6 +8,7 @@ import {
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ARTISTS } from 'src/global/artists';
+import { CountdownService } from 'src/global/countdown.service';
 import { GameService } from 'src/global/game.service';
 import {
   Artist,
@@ -30,7 +31,8 @@ export class GuessScreenComponent implements OnInit, OnDestroy {
     private activatedRoute: ActivatedRoute,
     private gameService: GameService,
     private requestService: RequestService,
-    private router: Router
+    private router: Router,
+    private countdownService: CountdownService
   ) {}
 
   timerObj: Timer = {
@@ -76,6 +78,7 @@ export class GuessScreenComponent implements OnInit, OnDestroy {
     let random = Math.floor(Math.random() * data.data.length);
 
     this.trackData = data.data[random];
+    this.track.currentTime = 0;
     this.track.src = this.trackData.preview;
     this.track.volume = 0.3;
 
@@ -84,6 +87,29 @@ export class GuessScreenComponent implements OnInit, OnDestroy {
     }
 
     this.artistData = this.trackData.artist;
+  }
+
+  restart() {
+    this.errorHandling();
+
+    //timer
+    this.timerObj.minutes = 0;
+    this.timerObj.seconds = 30;
+    this.timerInterval = 0;
+
+    //progress bar
+    this.progressTrack.nativeElement.style.width = `100%`;
+    this.progressTrack.nativeElement.classList.add('progress-running');
+    this.imageContainer.nativeElement.removeAttribute('style');
+
+    //flags
+    this.guessed = false;
+    this.hideLoading = false;
+    this.countdownEnded = false;
+
+    //fields
+    this.artistName.nativeElement.value = '';
+    this.songName.nativeElement.value = '';
   }
 
   start() {
@@ -158,6 +184,10 @@ export class GuessScreenComponent implements OnInit, OnDestroy {
   }
 
   checkGuess() {
+    if (this.guessed) {
+      return this.nextRound();
+    }
+
     if (
       this.artistNameValue?.toLowerCase() ===
         this.artistData.name.toLowerCase() &&
@@ -186,6 +216,11 @@ export class GuessScreenComponent implements OnInit, OnDestroy {
     }
   }
 
+  nextRound() {
+    this.countdownService.restart();
+    this.restart();
+  }
+
   gameOver() {
     this.stopGame('/assets/audio/gameover.mp3');
     this.guessed = false;
@@ -208,6 +243,7 @@ export class GuessScreenComponent implements OnInit, OnDestroy {
 
   correctGuess() {
     this.stopGame('assets/audio/correct.mp3');
+    this.gameService.game.score++;
     this.imageContainer.nativeElement.style.backgroundImage = `url(${this.moreArtistData.image})`;
   }
 
@@ -237,5 +273,9 @@ export class GuessScreenComponent implements OnInit, OnDestroy {
 
   get moreArtistData() {
     return this.artist.find((artist) => artist.name === this.artistData.name)!;
+  }
+
+  get score() {
+    return this.gameService.game.score;
   }
 }

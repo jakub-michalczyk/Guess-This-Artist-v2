@@ -2,6 +2,8 @@
 
 <app-countdown (countdownEnded)="start()"></app-countdown>
 
+<app-score></app-score>
+
 <div class="bg">
     <div class="wrap guess-screen-wrap">
         <div class="main">
@@ -53,7 +55,7 @@
                 <div class="btn-wrap">
                     <button (click)="checkGuess()"
                             [ngClass]="{'next-artist-btn': guessed}"
-                            class="guess-btn">{{ !guessed ? 'Guess' : 'Next Artist'}}</button>
+                            class="guess-btn">{{ !guessed ? 'Guess' : 'Next round'}}</button>
                 </div>
             </div>
         </div>
@@ -64,7 +66,7 @@
         <h1 class="lost-heading">
             <span class="lost-info">You lost 😔</span>
             <span class="score-info">
-                Your score is <span>19 points</span>
+                Your score is <span>{{ score }} points</span>
             </span>
             <button class="btn">Guess Again!</button>
         </h1>
@@ -82,7 +84,7 @@
                            #artistName
                            type="input"
                            class="input"
-                           placeholder="Name"
+                           placeholder="Type artist name"
                            name="name"
                            id='name'
                            required />
@@ -94,7 +96,7 @@
                            #songName
                            type="input"
                            class="input"
-                           placeholder="Name"
+                           placeholder="Type song name"
                            name="name"
                            id='name'
                            required />
