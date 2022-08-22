@@ -133,9 +133,25 @@
                         </ng-container>
 
                         <ng-container *ngSwitchCase="'song'">
-                            <li (click)="chooseSong(dataElem)"
-                                class="list-element"
-                                *ngFor="let dataElem of value.data">{{dataElem}}</li>
+                            <div class="loader-spin-wrap"
+                                 *ngIf="value.data[0] === 'placeholder'">
+                                <div class="lds-roller">
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                            </div>
+
+                            <ng-container *ngIf="value.data[0] !== 'placeholder'">
+                                <li (click)="chooseSong(dataElem)"
+                                    class="list-element"
+                                    *ngFor="let dataElem of value.data">{{dataElem}}</li>
+                            </ng-container>
                         </ng-container>
                     </ng-container>
 

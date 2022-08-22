@@ -81,6 +81,7 @@ export class GuessScreenComponent implements OnInit, OnDestroy {
 
     this.trackData = this.getFilterDuplicatedSongs(data)[random];
     this.track.currentTime = 0;
+    console.log(this.track);
     this.track.src = this.trackData.preview;
     this.track.volume = 0.3;
 
@@ -149,6 +150,15 @@ export class GuessScreenComponent implements OnInit, OnDestroy {
   }
 
   validateSongs(data: string[]) {
+    //clear previous results
+    while (data.length > 0) {
+      data.pop();
+    }
+
+    if (!data.includes('placeholder')) {
+      data.push('placeholder');
+    }
+    console.log(data);
     this.requestService.getSimiliarSongs(this.songNameValue).then((dataObs) => {
       dataObs?.subscribe((songs) => {
         let isError = songs as ErrorFallback;
@@ -157,11 +167,14 @@ export class GuessScreenComponent implements OnInit, OnDestroy {
           return this.validateSongs(data);
         } else {
           let songsData = songs as SongsData;
+
           songsData.data.forEach((song) => {
             if (!data.includes(song.title)) {
               data.push(song.title);
             }
           });
+
+          data.shift();
         }
       });
     });
@@ -179,9 +192,15 @@ export class GuessScreenComponent implements OnInit, OnDestroy {
             .toLowerCase()
             .includes(this.artistNameValue.replace(/[^a-zA-Z ]/g, ''))
         ) {
+          //clear previous results
+          while (data.length > 0) {
+            data.pop();
+          }
+
           data.push(artist);
         }
       }
+      console.log(data);
     });
   }
 

@@ -1,6 +1,7 @@
 @use "/src/global/main";
 
 .guess-screen {
+  @extend .scroll;
   position: absolute;
   top: 0;
   right: 0;
@@ -20,23 +21,6 @@
   padding: 0 2%;
   -webkit-box-shadow: -6px 4px 25px 0px rgba(226, 64, 65, 0.12);
   box-shadow: -6px 4px 25px 0px rgba(226, 64, 65, 0.12);
-  &::-webkit-scrollbar-track {
-    border-radius: 50px;
-    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-    background-color: main.$dark;
-  }
-
-  &::-webkit-scrollbar {
-    border-radius: 50px;
-    width: 5px;
-    background-color: main.$dark;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    border-radius: 50px;
-    background-color: main.$darkred;
-  }
 }
 
 .hide-settings {
