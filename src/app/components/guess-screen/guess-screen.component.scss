@@ -47,6 +47,7 @@
 
 .guess-screen-wrap {
   @include main.flex(center, flex-start);
+  box-sizing: border-box;
   padding-top: 10%;
 }
 
@@ -221,7 +222,7 @@
   position: absolute;
   z-index: 99;
   background-color: main.$dark_opacity;
-  .btn {
+  .lost-btn {
     @extend .btn;
     margin-top: 15%;
   }
