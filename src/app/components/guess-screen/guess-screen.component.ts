@@ -75,9 +75,11 @@ export class GuessScreenComponent implements OnInit, OnDestroy {
   }
 
   init(data: FallbackData) {
-    let random = Math.floor(Math.random() * data.data.length);
+    let random = Math.floor(
+      Math.random() * this.getFilterDuplicatedSongs(data).length
+    );
 
-    this.trackData = data.data[random];
+    this.trackData = this.getFilterDuplicatedSongs(data)[random];
     this.track.currentTime = 0;
     this.track.src = this.trackData.preview;
     this.track.volume = 0.3;
@@ -243,6 +245,7 @@ export class GuessScreenComponent implements OnInit, OnDestroy {
 
   correctGuess() {
     this.stopGame('assets/audio/correct.mp3');
+    this.gameService.game.guessedSongs.push(this.trackData.title);
     this.gameService.game.score++;
     this.imageContainer.nativeElement.style.backgroundImage = `url(${this.moreArtistData.image})`;
   }
@@ -277,5 +280,14 @@ export class GuessScreenComponent implements OnInit, OnDestroy {
 
   get score() {
     return this.gameService.game.score;
+  }
+
+  getFilterDuplicatedSongs(data: FallbackData) {
+    let songs = data.data as TrackData[];
+    return songs.filter((song) => {
+      return !this.gameService.game.guessedSongs.includes(song.title)
+        ? song
+        : undefined;
+    });
   }
 }

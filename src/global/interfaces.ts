@@ -1,9 +1,10 @@
 export interface Game {
-  [setting: string]: string | number | string[] | Life[] | Option;
+  [setting: string]: string | number | string[] | Life[] | Option | SongData[];
   artist: string;
   lifes: Life[];
   score: number;
   genre: string;
+  guessedSongs: string[];
   nationality: 'polish' | 'international';
   options: Option;
   length: number;
