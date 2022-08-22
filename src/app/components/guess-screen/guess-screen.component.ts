@@ -146,6 +146,11 @@ export class GuessScreenComponent implements OnInit, OnDestroy {
       if (this.timerObj.seconds < 6 && this.track.volume > 0) {
         this.track.volume -= 0.05;
       }
+
+      if (this.timerObj.seconds === 0) {
+        this.gameOver();
+        return window.clearInterval(this.timerInterval);
+      }
     }, 1000);
   }
 
@@ -158,7 +163,7 @@ export class GuessScreenComponent implements OnInit, OnDestroy {
     if (!data.includes('placeholder')) {
       data.push('placeholder');
     }
-    console.log(data);
+
     this.requestService.getSimiliarSongs(this.songNameValue).then((dataObs) => {
       dataObs?.subscribe((songs) => {
         let isError = songs as ErrorFallback;
@@ -200,7 +205,6 @@ export class GuessScreenComponent implements OnInit, OnDestroy {
           data.push(artist);
         }
       }
-      console.log(data);
     });
   }
 
@@ -247,6 +251,14 @@ export class GuessScreenComponent implements OnInit, OnDestroy {
     this.guessed = false;
     this.gameOverOverlayer.nativeElement.className +=
       ' game-over-overlayer-full';
+  }
+
+  restartAfterLost() {
+    this.gameService.game.lifes.forEach((life) => (life.exists = true));
+    this.gameOverOverlayer.nativeElement.classList.remove(
+      'game-over-overlayer-full'
+    );
+    this.nextRound();
   }
 
   stopGame(audioSrc: string) {

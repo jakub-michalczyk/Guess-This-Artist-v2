@@ -68,7 +68,8 @@
             <span class="score-info">
                 Your score is <span>{{ score }} points</span>
             </span>
-            <button class="btn">Guess Again!</button>
+            <button (click)="restartAfterLost()"
+                    class="btn">Guess Again!</button>
         </h1>
     </div>
 
