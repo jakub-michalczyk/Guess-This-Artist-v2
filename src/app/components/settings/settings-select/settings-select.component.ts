@@ -11,8 +11,6 @@ export class SettingsSelectComponent implements OnInit {
   @Input()
   heading = '';
   @Input()
-  description = '';
-  @Input()
   option = {};
   @Input()
   avaiableOptions: string[] = [];

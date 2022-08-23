@@ -11,24 +11,21 @@
           [ngClass]="{'fade-out-settings-content': hide}">
 
           <app-settings-select name="nationality"
-                               heading="NATIONALITY"
-                               description="Choose the nationality of the artists."
+                               heading="Nationality"
                                [avaiableOptions]="gameSettings.game.options.nationality"
                                [option]="gameSettings.game.nationality"
                                (changeVal)="handleUpdateSettings($event)">
           </app-settings-select>
 
           <app-settings-select name="genre"
-                               heading="GENRE"
-                               description="Choose the genre of the artists music."
+                               heading="Genre"
                                [avaiableOptions]="gameSettings.game.options.genre"
                                [option]="gameSettings.game.genre"
                                (changeVal)="handleUpdateSettings($event)">
           </app-settings-select>
 
           <app-settings-select name="artist"
-                               heading="ARTIST"
-                               description="Choose a specific artist from whose catalog the songs will be randomly selected."
+                               heading="Artist"
                                [avaiableOptions]="artists"
                                [option]="gameSettings.game.artist"
                                (changeVal)="handleUpdateSettings($event)">

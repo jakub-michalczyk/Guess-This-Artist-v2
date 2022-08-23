@@ -36,6 +36,6 @@ export class SettingsComponent {
       allArtists.push(artist.name)
     );
 
-    return allArtists;
+    return allArtists.sort();
   }
 }
