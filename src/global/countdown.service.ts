@@ -6,12 +6,5 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class CountdownService {
   needsRestart = new BehaviorSubject(false);
-
-  restart() {
-    this.needsRestart.next(true);
-  }
-
-  restarted() {
-    this.needsRestart.next(false);
-  }
+  isLoaded = new BehaviorSubject(false);
 }

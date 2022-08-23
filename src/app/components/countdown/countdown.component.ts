@@ -35,38 +35,41 @@ export class CountdownComponent implements OnInit {
           this.overlayerRef.nativeElement,
           this.countdownRef.nativeElement
         );
-        this.init();
-        return this.countdownService.restarted();
+      } else {
+        return this.init();
       }
     });
-
-    this.init();
   }
 
   init() {
-    let audio = new Audio();
-    audio.src = '/assets/audio/countdown.mp3';
-    audio.play();
-    this.countdownInterval = window.setInterval(() => {
-      if (this.countdown <= 0) {
-        if (
-          this.overlayerRef.nativeElement &&
-          this.countdownRef.nativeElement
-        ) {
-          this.renderer.removeChild(
-            this.overlayerRef.nativeElement,
-            this.countdownRef.nativeElement
-          );
-        }
+    this.countdownService.isLoaded.subscribe((loaded) => {
+      if (loaded) {
+        this.countdownService.isLoaded.next(false);
+        let audio = new Audio();
+        audio.src = '/assets/audio/countdown.mp3';
+        audio.play();
+        this.countdownInterval = window.setInterval(() => {
+          if (this.countdown <= 0) {
+            if (
+              this.overlayerRef.nativeElement &&
+              this.countdownRef.nativeElement
+            ) {
+              this.renderer.removeChild(
+                this.overlayerRef.nativeElement,
+                this.countdownRef.nativeElement
+              );
+            }
 
-        setTimeout(() => {
-          this.flag = true;
-          this.countdownEnded.emit(true);
-        }, 20);
+            setTimeout(() => {
+              this.flag = true;
+              this.countdownEnded.emit(true);
+            }, 20);
 
-        return window.clearInterval(this.countdownInterval);
+            return window.clearInterval(this.countdownInterval);
+          }
+          this.countdown -= 1;
+        }, 2000);
       }
-      this.countdown -= 1;
-    }, 2000);
+    });
   }
 }

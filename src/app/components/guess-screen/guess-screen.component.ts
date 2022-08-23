@@ -81,7 +81,6 @@ export class GuessScreenComponent implements OnInit, OnDestroy {
 
     this.trackData = this.getFilterDuplicatedSongs(data)[random];
     this.track.currentTime = 0;
-    console.log(this.track);
     this.track.src = this.trackData.preview;
     this.track.volume = 0.3;
 
@@ -135,6 +134,7 @@ export class GuessScreenComponent implements OnInit, OnDestroy {
   }
 
   hideLoadingScreen() {
+    this.countdownService.isLoaded.next(true);
     this.hideLoading = true;
   }
 
@@ -242,7 +242,7 @@ export class GuessScreenComponent implements OnInit, OnDestroy {
   }
 
   nextRound() {
-    this.countdownService.restart();
+    this.countdownService.needsRestart.next(true);
     this.restart();
   }
 
@@ -255,6 +255,7 @@ export class GuessScreenComponent implements OnInit, OnDestroy {
 
   restartAfterLost() {
     this.gameService.game.lifes.forEach((life) => (life.exists = true));
+    this.gameService.game.score = 0;
     this.gameOverOverlayer.nativeElement.classList.remove(
       'game-over-overlayer-full'
     );
