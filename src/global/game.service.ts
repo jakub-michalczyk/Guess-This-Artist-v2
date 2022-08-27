@@ -25,7 +25,7 @@ export class GameService {
       ],
       options: {
         mode: ['lyrics', 'music'],
-        genre: ['rap', 'pop', 'rock'],
+        genre: ['Rap', 'Pop', 'Rock', 'R&B'],
         nationality: ['polish', 'international'],
         artist: ARTISTS,
       },

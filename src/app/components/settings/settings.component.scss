@@ -42,13 +42,14 @@
   font-size: 2.5rem;
   margin-top: 10rem;
   text-transform: uppercase;
-  letter-spacing: 5px;
+  font-family: "Nunito", sans-serif;
   &::before {
     content: "";
     position: absolute;
-    top: -40%;
-    height: 20%;
+    top: -30%;
+    height: 15%;
     width: 50px;
+    letter-spacing: 2px;
     background: main.$darkred;
   }
 }

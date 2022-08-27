@@ -58,12 +58,15 @@ $dark_opacity: rgba(0, 0, 0, 0.6);
     background-position: center center;
     background-size: 50%;
   }
-  &:hover {
+  &:hover:enabled {
     background-color: $bgh;
     &::after {
-      animation-iteration-count: infinite;
       animation-fill-mode: forwards;
     }
+  }
+  &:disabled {
+    opacity: 0.3;
+    cursor: default;
   }
 }
 
@@ -108,7 +111,7 @@ $dark_opacity: rgba(0, 0, 0, 0.6);
   &::after {
     background-image: url("/assets/images/arrow-right.png");
   }
-  &:hover {
+  &:hover:enabled {
     &::after {
       animation: arrowAnimation 1.5s;
     }

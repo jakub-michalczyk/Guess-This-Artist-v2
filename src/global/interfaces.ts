@@ -5,7 +5,7 @@ export interface Game {
   score: number;
   genre: string;
   guessedSongs: string[];
-  nationality: 'polish' | 'international';
+  nationality: 'polish' | 'international' | '-';
   options: Option;
   length: number;
 }
@@ -20,8 +20,8 @@ export interface Option {
 export interface Artist {
   id?: number;
   name: string;
-  genre?: string[];
-  nationality?: 'polish' | 'international';
+  genre: string[];
+  nationality: 'polish' | 'international' | '-';
   image?: string;
 }
 

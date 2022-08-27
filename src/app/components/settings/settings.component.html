@@ -9,6 +9,12 @@
      <h2 class="heading">Settings</h2>
      <div class="settings-option-wrap"
           [ngClass]="{'fade-out-settings-content': hide}">
+          <app-settings-select name="artist"
+                               heading="Artist"
+                               [avaiableOptions]="artist"
+                               [option]="gameSettings.game.artist"
+                               (changeVal)="handleUpdateSettings($event)">
+          </app-settings-select>
 
           <app-settings-select name="nationality"
                                heading="Nationality"
@@ -21,13 +27,6 @@
                                heading="Genre"
                                [avaiableOptions]="gameSettings.game.options.genre"
                                [option]="gameSettings.game.genre"
-                               (changeVal)="handleUpdateSettings($event)">
-          </app-settings-select>
-
-          <app-settings-select name="artist"
-                               heading="Artist"
-                               [avaiableOptions]="artists"
-                               [option]="gameSettings.game.artist"
                                (changeVal)="handleUpdateSettings($event)">
           </app-settings-select>
      </div>
