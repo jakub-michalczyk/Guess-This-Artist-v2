@@ -1,4 +1,10 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
 import { GameService } from 'src/global/game.service';
 
 @Component({
@@ -12,7 +18,17 @@ export class SettingsComponent {
   @Input()
   settings = false;
   hide = false;
-  constructor(private gameService: GameService) {}
+
+  constructor(
+    private gameService: GameService,
+    private ref: ChangeDetectorRef
+  ) {}
+
+  ngOnInit() {
+    this.initArtistsArr();
+  }
+
+  initArtistsArr() {}
 
   handleUpdateSettings(changed: { name: string; value: string }) {
     this.gameService.updateSettings(changed.name, changed.value);
@@ -30,12 +46,15 @@ export class SettingsComponent {
     return this.gameService;
   }
 
-  get artists(): string[] {
+  get artist() {
     let allArtists: string[] = [];
-    this.gameSettings.game.options.artist.forEach((artist) =>
-      allArtists.push(artist.name)
-    );
 
+    this.gameSettings.game.options.artist.forEach((artist) => {
+      allArtists.push(artist.name);
+    });
+
+    allArtists = allArtists.sort();
+    allArtists.unshift('Random');
     return allArtists;
   }
 }

@@ -1,8 +1,11 @@
 export interface Game {
-  [setting: string]: string | number | string[] | Life[] | Option;
-  mode: string;
+  [setting: string]: string | number | string[] | Life[] | Option | SongData[];
+  artist: string;
   lifes: Life[];
+  score: number;
   genre: string;
+  guessedSongs: string[];
+  nationality: 'polish' | 'international' | '-';
   options: Option;
   length: number;
 }
@@ -17,8 +20,9 @@ export interface Option {
 export interface Artist {
   id?: number;
   name: string;
-  genre?: ('Rap' | 'Rock' | 'Pop' | 'R&B')[];
-  nationality?: 'polish' | 'international';
+  genre: string[];
+  nationality: 'polish' | 'international' | '-';
+  image?: string;
 }
 
 export interface Song {

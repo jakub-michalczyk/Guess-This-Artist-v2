@@ -11,26 +11,30 @@
   padding-bottom: 5%;
   margin: 3% 0;
   border-bottom: 1px solid main.$darkred;
-  p {
-    @include main.flex(center, center);
-    font-weight: 300;
-    color: main.$lightgrey;
-    font-size: 0.8rem;
-    line-height: 1.3rem;
-    margin-left: 5%;
-    margin-top: 0;
+  h2 {
+    @include main.flex(flex-start, center);
+    width: 60%;
+    position: relative;
+    font-family: "Nunito", sans-serif;
     &::before {
-      position: relative;
-      top: 0;
-      left: 0;
-      width: 20px;
-      height: 30px;
       content: "";
-      margin-right: 5%;
+      height: 4px;
+      width: 10%;
       background: main.$darkred;
+      margin-right: 10px;
+      border-radius: 50px 0 0 50px;
+    }
+    &::after {
+      content: "";
+      height: 4px;
+      width: 30%;
+      background: main.$darkred;
+      margin-left: 10px;
+      border-radius: 0 50px 50px 0;
     }
   }
   select {
+    @extend .scroll;
     margin-top: 5%;
     width: 50%;
     padding: 1em 2em;

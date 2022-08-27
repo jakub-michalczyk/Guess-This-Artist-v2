@@ -10,11 +10,12 @@ export class GameService {
 
   constructor() {
     this.game = {
-      mode: 'music',
-      genre: 'rap',
-      nationality: 'International',
+      genre: 'Rap',
+      nationality: 'international',
       artist: 'Random',
       length: 150,
+      guessedSongs: [],
+      score: 0,
       lifes: [
         { exists: true },
         { exists: true },
@@ -24,7 +25,7 @@ export class GameService {
       ],
       options: {
         mode: ['lyrics', 'music'],
-        genre: ['rap', 'pop', 'rock'],
+        genre: ['Rap', 'Pop', 'Rock', 'R&B'],
         nationality: ['polish', 'international'],
         artist: ARTISTS,
       },

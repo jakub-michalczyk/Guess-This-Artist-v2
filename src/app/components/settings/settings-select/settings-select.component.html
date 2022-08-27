@@ -1,10 +1,8 @@
 <div class="choice-wrap">
     <h2>{{heading}}</h2>
-    <p>
-        {{description}}
-    </p>
     <select [name]="name"
             #select
+            [attr.id]="select.name"
             (change)="onChangeVal(select.name, select.value)">
         <option *ngFor="let opt of avaiableOptions"
                 [attr.selected]="option === opt ? 'selected' : null"

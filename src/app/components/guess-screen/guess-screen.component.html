@@ -2,12 +2,16 @@
 
 <app-countdown (countdownEnded)="start()"></app-countdown>
 
+<app-score></app-score>
+
 <div class="bg">
     <div class="wrap guess-screen-wrap">
         <div class="main">
-            <div class="unknown">
+            <div #imageContainer
+                 class="unknown">
                 <div class="timer">
-                    {{ timerObj.minutes < 10
+                    {{
+                    timerObj.minutes < 10
                       ?
                       ('0'
                       +
@@ -26,11 +30,19 @@
                       }}
                       </div>
                 </div>
+                <div class="guessed-data"
+                     *ngIf="guessed">
+                    <span class="artist-name">{{artistData.name}} - </span>
+                    <span class="song-title">{{trackData.title}}</span>
+                </div>
                 <div class="track">
-                    <div class="progress"></div>
+                    <div #progressTrack
+                         class="progress"
+                         [ngClass]="{'progress-running': timerInterval}"></div>
                 </div>
                 <div class="lifes-wrap">
-                    <div *ngFor="let life of lifes">
+                    <div *ngFor="let life of lifes"
+                         [ngClass]="{'no-life': !life.exists}">
                         <img src="/assets/images/heart.png" />
                     </div>
                 </div>
@@ -42,11 +54,25 @@
                 </ng-container>
                 <div class="btn-wrap">
                     <button (click)="checkGuess()"
-                            class="guess-btn">Guess</button>
+                            [ngClass]="{'next-artist-btn': guessed}"
+                            class="guess-btn">{{ !guessed ? 'Guess' : 'Next round'}}</button>
                 </div>
             </div>
         </div>
     </div>
+
+    <div #gameOver
+         class="game-over-overlayer">
+        <h1 class="lost-heading">
+            <span class="lost-info">You lost 😔</span>
+            <span class="score-info">
+                Your score is <span>{{ score }} points</span>
+            </span>
+            <button (click)="restartAfterLost()"
+                    class="lost-btn">Guess Again!</button>
+        </h1>
+    </div>
+
     <ng-template let-value
                  #fieldGroup>
 
@@ -55,10 +81,11 @@
 
                 <!-- artist -->
                 <ng-container *ngSwitchCase="'artist'">
-                    <input #artistName
+                    <input [disabled]="guessed"
+                           #artistName
                            type="input"
                            class="input"
-                           placeholder="Name"
+                           placeholder="Type artist name"
                            name="name"
                            id='name'
                            required />
@@ -66,10 +93,11 @@
 
                 <!-- song -->
                 <ng-container *ngSwitchCase="'song'">
-                    <input #songName
+                    <input [disabled]="guessed"
+                           #songName
                            type="input"
                            class="input"
-                           placeholder="Name"
+                           placeholder="Type song name"
                            name="name"
                            id='name'
                            required />
@@ -77,15 +105,23 @@
             </ng-container>
             <ng-container [ngSwitch]="value.type">
                 <button *ngSwitchCase="'artist'"
+                        [disabled]="guessed"
                         (click)="validateArtists(value.data)"
                         class="input-btn">Check</button>
 
                 <button *ngSwitchCase="'song'"
+                        [disabled]="guessed"
                         (click)="validateSongs(value.data)"
                         class="input-btn">Check</button>
+
+                <img *ngIf="value.data.length > 0"
+                     class="remove-hint-list"
+                     src="/assets/images/close.png"
+                     (click)="closeHintList(value.type)" />
             </ng-container>
 
-            <label for="name"
+            <label [attr.data-disabled]="guessed"
+                   for="name"
                    class="label">{{value.type === 'song' ? 'Song' : 'Artist'}} name</label>
 
             <ng-container *ngIf="!!value.data?.length">
@@ -98,15 +134,29 @@
                         </ng-container>
 
                         <ng-container *ngSwitchCase="'song'">
-                            <li (click)="chooseSong(dataElem)"
-                                class="list-element"
-                                *ngFor="let dataElem of value.data">{{dataElem}}</li>
+                            <div class="loader-spin-wrap"
+                                 *ngIf="value.data[0] === 'placeholder'">
+                                <div class="lds-roller">
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                            </div>
+
+                            <ng-container *ngIf="value.data[0] !== 'placeholder'">
+                                <li (click)="chooseSong(dataElem)"
+                                    class="list-element"
+                                    *ngFor="let dataElem of value.data">{{dataElem}}</li>
+                            </ng-container>
                         </ng-container>
                     </ng-container>
 
                 </ul>
-                <button (click)="closeHintList(value.type)"
-                        class="close-list">Close</button>
             </ng-container>
         </div>
     </ng-template>

@@ -1,0 +1,13 @@
+@use "/src/global/main";
+
+.score-container {
+  position: absolute;
+  top: 0%;
+  right: calc(0% + 1rem);
+  padding: 2rem;
+  z-index: 3;
+  color: main.$white;
+  font-size: 3rem;
+  transform: rotate(7.5deg);
+  box-sizing: border-box;
+}

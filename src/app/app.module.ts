@@ -9,6 +9,7 @@ import { LoadingScreenComponent } from './components/loading-screen/loading-scre
 import { SettingsSelectComponent } from './components/settings/settings-select/settings-select.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { StartScreenComponent } from './components/start-screen/start-screen.component';
+import { ScoreComponent } from './components/score/score.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { StartScreenComponent } from './components/start-screen/start-screen.com
     GuessScreenComponent,
     LoadingScreenComponent,
     CountdownComponent,
+    ScoreComponent,
   ],
   imports: [BrowserModule, HttpClientModule, AppRoutingModule],
   providers: [],
