@@ -12,6 +12,18 @@
   position: relative;
 }
 
+.main-wrap {
+  width: 100%;
+  min-height: 100%;
+  height: auto;
+}
+
+.bg-fixed {
+  position: fixed;
+  min-height: 100%;
+  height: auto;
+}
+
 .guessed-data {
   position: absolute;
   width: calc(100% - 14px);
@@ -122,6 +134,8 @@
     top: 0;
     left: 0;
     font-size: 0.8rem;
+    transition: top 0.2s, background-color 0.2s;
+    z-index: 3;
   }
   .list {
     @extend .scroll;
@@ -133,7 +147,7 @@
     list-style: none;
     position: absolute;
     bottom: -255px;
-    z-index: 2;
+    z-index: 3;
     width: 400px;
     height: 250px;
     overflow-y: auto;
@@ -213,13 +227,13 @@
 
 .game-over-overlayer {
   @include main.flex(center, center, column);
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   overflow: hidden;
   height: 0;
   transition: height 0.3s;
-  position: absolute;
   z-index: 99;
   background-color: main.$dark_opacity;
   .lost-btn {
@@ -383,5 +397,73 @@ label[data-disabled="true"] {
   }
   100% {
     transform: scale(1) rotate(0deg);
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .guess-screen-wrap {
+    @include main.flex(center, center, column);
+    padding-top: 10%;
+    padding-bottom: 10%;
+    height: auto !important;
+    .open {
+      top: -265px;
+      background-color: main.$lightred;
+      padding: 5px;
+    }
+    .inputs-wrap {
+      margin-left: 0;
+      margin-top: 5%;
+    }
+    .bg {
+      min-height: 100%;
+      height: auto;
+    }
+    .list {
+      top: -235px;
+      bottom: auto;
+    }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .unknown {
+    width: 300px;
+    height: 300px;
+  }
+  .btn-wrap {
+    text-align: center;
+    margin-top: 5%;
+    .guess-btn {
+      width: 100%;
+    }
+  }
+  .track {
+    width: 314px;
+  }
+  .main .lifes-wrap {
+    width: 330px;
+  }
+  .form-group {
+    width: 300px;
+    .list {
+      width: 300px;
+    }
+  }
+  .timer {
+    font-size: 4rem;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .guess-screen-wrap {
+    padding-top: 25%;
+  }
+  .timer {
+    width: 100%;
+    transform: none;
+    top: -17%;
+    left: 0;
+    text-align: center;
   }
 }

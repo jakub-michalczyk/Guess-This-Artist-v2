@@ -137,56 +137,32 @@
   }
 }
 
-@media only screen and (max-width: 1024px) {
-  @keyframes showSettings {
-    from {
-      width: 0%;
-    }
-    to {
-      width: 96%;
-    }
-  }
-
-  @keyframes hideSettings {
-    from {
-      width: 96%;
-    }
-    to {
-      width: 0%;
-    }
-  }
-
-  .guess-screen {
-    overflow-y: auto;
-  }
-}
-
-@media only screen and (min-width: 1024px) {
-  @keyframes showSettings {
-    from {
-      width: 0%;
-    }
-    to {
-      width: 50%;
-    }
-  }
-
-  @keyframes hideSettings {
-    from {
-      width: 50%;
-    }
-    to {
-      width: 0%;
-    }
-  }
-}
-
 @media only screen and (min-width: 1200px) {
   @keyframes showSettings {
     from {
       width: 0%;
     }
     to {
+      width: 25%;
+    }
+  }
+
+  @keyframes hideSettings {
+    from {
+      width: 25%;
+    }
+    to {
+      width: 0%;
+    }
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  @keyframes showSettings {
+    from {
+      width: 0%;
+    }
+    to {
       width: 20%;
     }
   }
@@ -194,6 +170,50 @@
   @keyframes hideSettings {
     from {
       width: 20%;
+    }
+    to {
+      width: 0%;
+    }
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  @keyframes showSettings {
+    from {
+      width: 0%;
+    }
+    to {
+      width: 50%;
+    }
+  }
+
+  @keyframes hideSettings {
+    from {
+      width: 50%;
+    }
+    to {
+      width: 0%;
+    }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .guess-screen {
+    box-sizing: border-box;
+  }
+
+  @keyframes showSettings {
+    from {
+      width: 0%;
+    }
+    to {
+      width: 100%;
+    }
+  }
+
+  @keyframes hideSettings {
+    from {
+      width: 100%;
     }
     to {
       width: 0%;

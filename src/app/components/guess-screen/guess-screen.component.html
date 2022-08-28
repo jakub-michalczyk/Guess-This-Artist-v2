@@ -4,7 +4,8 @@
 
 <app-score></app-score>
 
-<div class="bg">
+<div class="main-wrap">
+    <div class="bg bg-fixed"></div>
     <div class="wrap guess-screen-wrap">
         <div class="main">
             <div #imageContainer
@@ -122,7 +123,8 @@
 
             <label [attr.data-disabled]="guessed"
                    for="name"
-                   class="label">{{value.type === 'song' ? 'Song' : 'Artist'}} name</label>
+                   class="label"
+                   [ngClass]="{'open': !!value.data?.length}">{{value.type === 'song' ? 'Song' : 'Artist'}} name</label>
 
             <ng-container *ngIf="!!value.data?.length">
                 <ul class="list">

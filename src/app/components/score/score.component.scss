@@ -11,3 +11,27 @@
   transform: rotate(7.5deg);
   box-sizing: border-box;
 }
+
+@media only screen and (max-width: 768px) {
+  .score-container {
+    padding: 1rem;
+    font-size: 2.5rem;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .score-container {
+    @include main.flex(center, center);
+    outline: 2px solid main.$lightred;
+    outline-offset: 4px;
+    transform: rotate(0deg);
+    right: 0;
+    background: main.$lightred;
+    font-size: 1.75rem;
+    vertical-align: center;
+    border-radius: 50%;
+    width: 5rem;
+    height: 5rem;
+    text-align: center;
+  }
+}

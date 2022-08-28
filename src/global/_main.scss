@@ -168,13 +168,3 @@ $dark_opacity: rgba(0, 0, 0, 0.6);
     background-position: 50%;
   }
 }
-
-@media only screen and (max-width: 576px) {
-  .box {
-    margin-top: 1rem;
-  }
-  .logo {
-    width: 75%;
-    height: 37.5%;
-  }
-}
