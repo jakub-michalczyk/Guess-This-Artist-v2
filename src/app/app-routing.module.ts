@@ -18,6 +18,7 @@ const routes: Routes = [
       data: GuessScreenResolver,
     },
   },
+  { path: '**', redirectTo: '/start' },
 ];
 
 @NgModule({
