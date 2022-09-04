@@ -658,4 +658,196 @@ export const ARTISTS: Artist[] = [
     image:
       'https://e-cdns-images.dzcdn.net/images/artist/8605667482f2a01e3768caabb8ee6aaf/500x500-000000-80-0-0.jpg',
   },
+  {
+    id: 12436,
+    genre: ['Pop'],
+    name: 'Miley Cyrus',
+    nationality: 'international',
+    image:
+      'https://e-cdns-images.dzcdn.net/images/artist/26b19cf18df01c0664e8f0806b173bda/500x500-000000-80-0-0.jpg',
+  },
+  {
+    id: 9761322,
+    genre: ['Pop'],
+    name: 'Zayn',
+    nationality: 'international',
+    image:
+      'https://e-cdns-images.dzcdn.net/images/artist/324d472dbe44161377caefcff8276ce5/500x500-000000-80-0-0.jpg',
+  },
+  {
+    id: 1362735,
+    genre: ['Pop'],
+    name: 'Charlie Puth',
+    nationality: 'international',
+    image:
+      'https://e-cdns-images.dzcdn.net/images/artist/b135b3ce18afd6a855b88842f0bea066/500x500-000000-80-0-0.jpg',
+  },
+  {
+    id: 776,
+    genre: ['Rap', 'Pop'],
+    name: 'Pitbull',
+    nationality: 'international',
+    image:
+      'https://e-cdns-images.dzcdn.net/images/artist/f755bcad19948129e670598a52d3f874/500x500-000000-80-0-0.jpg',
+  },
+  {
+    id: 1097709,
+    genre: ['Pop'],
+    name: 'Sam Smith',
+    nationality: 'international',
+    image:
+      'https://e-cdns-images.dzcdn.net/images/artist/d42e724e123eb5c97865bc117c936d38/500x500-000000-80-0-0.jpg',
+  },
+  {
+    id: 3469,
+    genre: ['Pop'],
+    name: 'Sia',
+    nationality: 'international',
+    image:
+      'https://e-cdns-images.dzcdn.net/images/artist/12e3483ed6efd64bcc90f7afad2015c8/500x500-000000-80-0-0.jpg',
+  },
+  {
+    id: 1007876,
+    genre: ['Pop'],
+    name: 'One Direction',
+    nationality: 'international',
+    image:
+      'https://e-cdns-images.dzcdn.net/images/artist/6760dba71ba14145eec5478d8b135c55/500x500-000000-80-0-0.jpg',
+  },
+  {
+    id: 103,
+    genre: ['Pop'],
+    name: 'Pharrell Williams',
+    nationality: 'international',
+    image:
+      'https://e-cdns-images.dzcdn.net/images/artist/67f517c99b8b6ca8d9bde94db363b887/500x500-000000-80-0-0.jpg',
+  },
+  {
+    id: 5962948,
+    genre: ['Pop'],
+    name: 'Shawn Mendes',
+    nationality: 'international',
+    image:
+      'https://e-cdns-images.dzcdn.net/images/artist/7432efa1fc1d9a1c5a7049512792b9fc/500x500-000000-80-0-0.jpg',
+  },
+  {
+    id: 1002521,
+    genre: ['Pop'],
+    name: 'Carly Rae Jespsen',
+    nationality: 'international',
+    image:
+      'https://e-cdns-images.dzcdn.net/images/artist/d46e1ad50a3c259c801dd06ca2e95754/500x500-000000-80-0-0.jpg',
+  },
+  {
+    id: 647650,
+    genre: ['Pop'],
+    name: 'Twenty One Pilots',
+    nationality: 'international',
+    image:
+      'https://e-cdns-images.dzcdn.net/images/artist/c259fffca57feb4274a932f90392521f/500x500-000000-80-0-0.jpg',
+  },
+  {
+    id: 5828,
+    genre: ['Pop', 'Rap'],
+    name: 'DJ Khaled',
+    nationality: 'international',
+    image:
+      'https://e-cdns-images.dzcdn.net/images/artist/f68b4f01414c76b7f36dcb979c88c367/500x500-000000-80-0-0.jpg',
+  },
+  {
+    id: 542,
+    genre: ['Pop'],
+    name: 'David Guetta',
+    nationality: 'international',
+    image:
+      'https://e-cdns-images.dzcdn.net/images/artist/e21bc6e42211c589982c2d7994cd53f4/500x500-000000-80-0-0.jpg',
+  },
+  {
+    id: 12178,
+    genre: ['Pop'],
+    name: 'Calvin Harris',
+    nationality: 'international',
+    image:
+      'https://e-cdns-images.dzcdn.net/images/artist/566c5a0826b2981a396850ad6ab54429/500x500-000000-80-0-0.jpg',
+  },
+  {
+    id: 249599,
+    genre: ['Pop', 'R&B'],
+    name: 'Jason Derulo',
+    nationality: 'international',
+    image:
+      'https://e-cdns-images.dzcdn.net/images/artist/955a40075bfd5d5501f266bd0cc79381/500x500-000000-80-0-0.jpg',
+  },
+  {
+    id: 985109,
+    genre: ['Pop'],
+    name: 'Jessie J',
+    nationality: 'international',
+    image:
+      'https://e-cdns-images.dzcdn.net/images/artist/f55f3bbaacb5db78e0603ec55a221e12/500x500-000000-80-0-0.jpg',
+  },
+  {
+    id: 4104927,
+    genre: ['Pop'],
+    name: 'The Chainsmokers',
+    nationality: 'international',
+    image:
+      'https://e-cdns-images.dzcdn.net/images/artist/df6be3970a5d859380178c003c656141/500x500-000000-80-0-0.jpg',
+  },
+  {
+    id: 311820,
+    genre: ['Pop'],
+    name: 'Ellie Goulding',
+    nationality: 'international',
+    image:
+      'https://e-cdns-images.dzcdn.net/images/artist/5c824c50f3d8befaac53c64abc7416f8/500x500-000000-80-0-0.jpg',
+  },
+  {
+    id: 45,
+    genre: ['Pop', 'R&B'],
+    name: 'Jennifer Lopez',
+    nationality: 'international',
+    image:
+      'https://e-cdns-images.dzcdn.net/images/artist/2fa1c95948cf111e38aed58b64b49556/500x500-000000-80-0-0.jpg',
+  },
+  {
+    id: 9236850,
+    genre: ['Pop'],
+    name: 'Camila Cabello',
+    nationality: 'international',
+    image:
+      'https://e-cdns-images.dzcdn.net/images/artist/e5550a661006e32b5549888bca4b6ccb/500x500-000000-80-0-0.jpg',
+  },
+  {
+    id: 8706544,
+    genre: ['Pop'],
+    name: 'Dua Lipa',
+    nationality: 'international',
+    image:
+      'https://e-cdns-images.dzcdn.net/images/artist/e6a04d735093a46dcc8be197681d1199/500x500-000000-80-0-0.jpg',
+  },
+  {
+    id: 293585,
+    genre: ['Pop'],
+    name: 'Avicii',
+    nationality: 'international',
+    image:
+      'https://e-cdns-images.dzcdn.net/images/artist/82e214b0cb39316f4a12a082fded54f6/500x500-000000-80-0-0.jpg',
+  },
+  {
+    id: 4999707,
+    genre: ['Pop'],
+    name: 'Alan Walker',
+    nationality: 'international',
+    image:
+      'https://e-cdns-images.dzcdn.net/images/artist/79d384488d390e65a6c27a95c431627e/500x500-000000-80-0-0.jpg',
+  },
+  {
+    id: 74804,
+    genre: ['Rap'],
+    name: 'Wiz Khalifa',
+    nationality: 'international',
+    image:
+      'https://e-cdns-images.dzcdn.net/images/artist/a1dc970ad2ad6afa42580c692b8a8a8d/500x500-000000-80-0-0.jpg',
+  },
 ];
