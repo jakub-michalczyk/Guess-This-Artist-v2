@@ -65,12 +65,20 @@
     <div #gameOver
          class="game-over-overlayer">
         <h1 class="lost-heading">
-            <span class="lost-info">You lost 😔</span>
-            <span class="score-info">
-                Your score is <span>{{ score }} points</span>
-            </span>
-            <button (click)="restartAfterLost()"
-                    class="lost-btn">Guess Again!</button>
+            <div class="left-side"
+                 [style.backgroundImage]="backgroundImage">
+                <span class="overlayer"></span>
+                <span class="not-guessed-data">Artist: <span>{{artistData.name}}</span></span>
+                <span class="not-guessed-data">Track: <span>{{trackData.title}}</span></span>
+            </div>
+            <div class="right-side">
+                <span class="lost-info">You lost 😔</span>
+                <span class="score-info">
+                    Your score is <span>{{ score }} points</span>
+                </span>
+                <button (click)="restartAfterLost()"
+                        class="lost-btn">Guess Again!</button>
+            </div>
         </h1>
     </div>
 
