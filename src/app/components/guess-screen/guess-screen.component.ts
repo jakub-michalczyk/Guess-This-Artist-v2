@@ -25,6 +25,9 @@ import { RequestService } from 'src/global/request.service';
   selector: 'app-guess-screen',
   templateUrl: './guess-screen.component.html',
   styleUrls: ['./guess-screen.component.scss'],
+  host: {
+    '(document:keydown)': 'handleKeyDown($event)',
+  },
 })
 export class GuessScreenComponent implements OnInit, OnDestroy {
   constructor(
@@ -42,6 +45,7 @@ export class GuessScreenComponent implements OnInit, OnDestroy {
   hideLoading = false;
   artist = ARTISTS;
   timerInterval = 0;
+  isLost = false;
   guessed = false;
   private track = new Audio();
   trackData = {} as TrackData;
@@ -112,6 +116,8 @@ export class GuessScreenComponent implements OnInit, OnDestroy {
     //fields
     this.artistName.nativeElement.value = '';
     this.songName.nativeElement.value = '';
+    this.fields[0].data = [];
+    this.fields[1].data = [];
   }
 
   start() {
@@ -248,6 +254,7 @@ export class GuessScreenComponent implements OnInit, OnDestroy {
 
   gameOver() {
     this.stopGame('/assets/audio/gameover.mp3');
+    this.isLost = true;
     this.guessed = false;
     this.gameOverOverlayer.nativeElement.className +=
       ' game-over-overlayer-full';
@@ -256,6 +263,7 @@ export class GuessScreenComponent implements OnInit, OnDestroy {
   restartAfterLost() {
     this.gameService.game.lifes.forEach((life) => (life.exists = true));
     this.gameService.game.score = 0;
+    this.isLost = false;
     this.gameOverOverlayer.nativeElement.classList.remove(
       'game-over-overlayer-full'
     );
@@ -279,6 +287,7 @@ export class GuessScreenComponent implements OnInit, OnDestroy {
     this.stopGame('assets/audio/correct.mp3');
     this.gameService.game.guessedSongs.push(this.trackData.title);
     this.gameService.game.score++;
+
     this.imageContainer.nativeElement.style.backgroundImage = `url(${this.moreArtistData.image})`;
   }
 
@@ -292,6 +301,34 @@ export class GuessScreenComponent implements OnInit, OnDestroy {
 
   chooseSong(data: string) {
     this.songName.nativeElement.value = data;
+  }
+
+  getFilterDuplicatedSongs(data: FallbackData) {
+    let songs = data.data as TrackData[];
+    return songs.filter((song) => {
+      return !this.gameService.game.guessedSongs.includes(song.title)
+        ? song
+        : undefined;
+    });
+  }
+
+  handleKeyDown(evt: KeyboardEvent) {
+    if (evt.key !== 'Enter' || this.timerObj.seconds === 30) {
+      return;
+    }
+
+    if (!this.guessed) {
+      if (
+        this.lifes.every((life) => !life.exists || this.timerObj.seconds > 0) &&
+        !this.isLost
+      ) {
+        this.checkGuess();
+      } else if (this.isLost) {
+        this.restartAfterLost();
+      }
+    } else {
+      this.nextRound();
+    }
   }
 
   get songNameValue(): string | undefined {
@@ -314,12 +351,7 @@ export class GuessScreenComponent implements OnInit, OnDestroy {
     return this.gameService.game.score;
   }
 
-  getFilterDuplicatedSongs(data: FallbackData) {
-    let songs = data.data as TrackData[];
-    return songs.filter((song) => {
-      return !this.gameService.game.guessedSongs.includes(song.title)
-        ? song
-        : undefined;
-    });
+  get backgroundImage() {
+    return this.moreArtistData ? `url('${this.moreArtistData.image}')` : '';
   }
 }
