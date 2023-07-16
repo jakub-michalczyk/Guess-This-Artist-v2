@@ -14,19 +14,10 @@ export class RequestService {
   artist = ARTISTS;
 
   getTrack(): Observable<Object> {
-    const options = {
-      method: 'GET',
-      url: 'https://deezerdevs-deezer.p.rapidapi.com/artist/13',
-      headers: {
-        'X-RapidAPI-Key': '9bbbd5d1fdmsh679c0fcf703b1dfp13fd49jsn64d8ba2c1463',
-        'X-RapidAPI-Host': 'deezerdevs-deezer.p.rapidapi.com',
-      },
-    };
-
     //Default setting
     let artist = this.filteredArtists;
-    let url = `https://deezerdevs-deezer.p.rapidapi.com/artist/${artist.id}/top?limit=150`;
-    return this.http.get(url, options).pipe(catchError(this.erroHandler));
+    let url = `https://api.deezer.com/artist/${artist.id}/top?limit=50`;
+    return this.http.get(url).pipe(catchError(this.erroHandler));
   }
 
   async getSimiliarSongs(query: string | undefined) {
