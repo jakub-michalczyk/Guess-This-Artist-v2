@@ -49,10 +49,11 @@
                 </div>
             </div>
             <div class="inputs-wrap">
-                <ng-container *ngFor="let fieldGroupData of fields">
-                    <ng-container [ngTemplateOutlet]="fieldGroup"
-                                  [ngTemplateOutletContext]="{ $implicit: fieldGroupData }"></ng-container>
-                </ng-container>
+                <ng-container *ngIf="showArtistInput"
+                              [ngTemplateOutlet]="fieldGroup"
+                              [ngTemplateOutletContext]="{ $implicit: fields[0] }"></ng-container>
+                <ng-container [ngTemplateOutlet]="fieldGroup"
+                              [ngTemplateOutletContext]="{ $implicit: fields[1] }"></ng-container>
                 <div class="btn-wrap">
                     <button (click)="checkGuess()"
                             [ngClass]="{'next-artist-btn': guessed}"
@@ -74,7 +75,7 @@
             <div class="right-side">
                 <span class="lost-info">You lost 😔</span>
                 <span class="score-info">
-                    Your score is <span>{{ score }} points</span>
+                    You scored <span>{{ score }} points</span>
                 </span>
                 <button (click)="restartAfterLost()"
                         class="lost-btn">Guess Again!</button>

@@ -49,6 +49,7 @@ export class RequestService {
   get filteredArtists(): Artist {
     let artistData = {} as Artist;
     if (this.gameService.game.artist === 'Random') {
+      this.gameService.game.hideArtistInput = true;
       let artistDataArr = this.artist.slice(1).filter((artist) => {
         if (
           artist.genre?.includes(this.gameService.game.genre) &&

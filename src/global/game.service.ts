@@ -16,6 +16,7 @@ export class GameService {
       length: 150,
       guessedSongs: [],
       score: 0,
+      hideArtistInput: false,
       lifes: [
         { exists: true },
         { exists: true },

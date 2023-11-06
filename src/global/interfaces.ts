@@ -1,11 +1,19 @@
 export interface Game {
-  [setting: string]: string | number | string[] | Life[] | Option | SongData[];
+  [setting: string]:
+    | string
+    | number
+    | boolean
+    | string[]
+    | Life[]
+    | Option
+    | SongData[];
   artist: string;
   lifes: Life[];
   score: number;
   genre: string;
   guessedSongs: string[];
   nationality: 'polish' | 'international' | '-';
+  hideArtistInput: boolean;
   options: Option;
   length: number;
 }
