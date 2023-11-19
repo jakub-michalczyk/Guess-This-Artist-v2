@@ -16,6 +16,7 @@ export class GameService {
       length: 150,
       guessedSongs: [],
       score: 0,
+      hideArtistInput: false,
       lifes: [
         { exists: true },
         { exists: true },
@@ -23,12 +24,14 @@ export class GameService {
         { exists: true },
         { exists: true },
       ],
+      lost: false,
       options: {
         mode: ['lyrics', 'music'],
         genre: ['Rap', 'Pop', 'Rock', 'R&B'],
         nationality: ['polish', 'international'],
         artist: ARTISTS,
       },
+      currentGameData: {},
     };
   }
 

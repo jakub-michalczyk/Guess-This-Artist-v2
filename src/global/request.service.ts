@@ -49,11 +49,13 @@ export class RequestService {
   get filteredArtists(): Artist {
     let artistData = {} as Artist;
     if (this.gameService.game.artist === 'Random') {
+      this.gameService.game.hideArtistInput = true;
       let artistDataArr = this.artist.slice(1).filter((artist) => {
         if (
           artist.genre?.includes(this.gameService.game.genre) &&
           artist.nationality === this.gameService.game.nationality
         ) {
+          this.saveArtistData(artist);
           return artist;
         } else {
           return undefined;
@@ -67,8 +69,15 @@ export class RequestService {
           artist.name.toLowerCase() ===
           this.gameService.game.artist.toLowerCase()
       )!;
+      this.saveArtistData(artistData);
     }
 
     return artistData;
+  }
+
+  saveArtistData(data: Artist) {
+    let game = this.gameService.game.currentGameData;
+    game.artist = data.name;
+    game.img = data.image;
   }
 }

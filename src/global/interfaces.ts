@@ -1,13 +1,24 @@
 export interface Game {
-  [setting: string]: string | number | string[] | Life[] | Option | SongData[];
+  [setting: string]:
+    | string
+    | number
+    | boolean
+    | CurrentGameData
+    | string[]
+    | Life[]
+    | Option
+    | SongData[];
   artist: string;
+  lost: boolean;
   lifes: Life[];
   score: number;
   genre: string;
   guessedSongs: string[];
   nationality: 'polish' | 'international' | '-';
+  hideArtistInput: boolean;
   options: Option;
   length: number;
+  currentGameData: CurrentGameData;
 }
 
 export interface Option {
@@ -69,4 +80,10 @@ export interface ErrorData {
 
 export interface FallbackData {
   data: [];
+}
+
+export interface CurrentGameData {
+  artist?: string;
+  track?: string;
+  img?: string;
 }
