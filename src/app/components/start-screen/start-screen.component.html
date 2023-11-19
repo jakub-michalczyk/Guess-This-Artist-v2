@@ -1,5 +1,7 @@
 <div class="bg">
-    <div class="wrap">
+    <app-lost-screen *ngIf="playerLost"></app-lost-screen>
+    <div class="wrap"
+         *ngIf="!playerLost">
         <div class="settings"
              (click)="changeSettings()"></div>
         <div class="logo"></div>

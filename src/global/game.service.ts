@@ -24,12 +24,14 @@ export class GameService {
         { exists: true },
         { exists: true },
       ],
+      lost: false,
       options: {
         mode: ['lyrics', 'music'],
         genre: ['Rap', 'Pop', 'Rock', 'R&B'],
         nationality: ['polish', 'international'],
         artist: ARTISTS,
       },
+      currentGameData: {},
     };
   }
 

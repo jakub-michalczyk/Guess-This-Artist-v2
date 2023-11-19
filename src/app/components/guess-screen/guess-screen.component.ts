@@ -45,7 +45,6 @@ export class GuessScreenComponent implements OnInit, OnDestroy {
   hideLoading = false;
   artist = ARTISTS;
   timerInterval = 0;
-  isLost = false;
   guessed = false;
   private track = new Audio();
   trackData = {} as TrackData;
@@ -59,9 +58,12 @@ export class GuessScreenComponent implements OnInit, OnDestroy {
   @ViewChild('songName') songName!: ElementRef<HTMLInputElement>;
   @ViewChild('imageContainer') imageContainer!: ElementRef<HTMLDivElement>;
   @ViewChild('progressTrack') progressTrack!: ElementRef<HTMLDivElement>;
-  @ViewChild('gameOver') gameOverOverlayer!: ElementRef<HTMLDivElement>;
 
   ngOnInit() {
+    if(this.gameService.game.lost){
+        this.gameService.game.lost = false;
+    }
+    
     this.activatedRoute.data.subscribe(({ data }) => {
       let isError = data as ErrorFallback;
       if (isError.error) {
@@ -86,12 +88,15 @@ export class GuessScreenComponent implements OnInit, OnDestroy {
     this.track.currentTime = 0;
     this.track.src = this.trackData.preview;
     this.track.volume = 0.3;
-
+    this.gameService.game.currentGameData.track = this.trackData.title;
+    this.gameService.game.currentGameData.artist = this.trackData.artist.name;
+  
     if (this.countdownEnded) {
       this.start();
     }
 
     this.artistData = this.trackData.artist;
+    this.gameService.game.currentGameData.img = this.moreArtistData?.image;
   }
 
   restart() {
@@ -267,21 +272,10 @@ export class GuessScreenComponent implements OnInit, OnDestroy {
 
   gameOver() {
     this.stopGame('/assets/audio/gameover.mp3');
-    this.router.navigate(['/start']);
-    this.isLost = true;
+    this.countdownService.needsRestart.next(true);
+    this.router.navigate(['/']);
+    this.gameService.game.lost = true;
     this.guessed = false;
-    this.gameOverOverlayer.nativeElement.className +=
-      ' game-over-overlayer-full';
-  }
-
-  restartAfterLost() {
-    this.gameService.game.lifes.forEach((life) => (life.exists = true));
-    this.gameService.game.score = 0;
-    this.isLost = false;
-    this.gameOverOverlayer.nativeElement.classList.remove(
-      'game-over-overlayer-full'
-    );
-    this.nextRound();
   }
 
   stopGame(audioSrc: string) {
@@ -332,14 +326,7 @@ export class GuessScreenComponent implements OnInit, OnDestroy {
     }
 
     if (!this.guessed) {
-      if (
-        this.lifes.every((life) => !life.exists || this.timerObj.seconds > 0) &&
-        !this.isLost
-      ) {
-        this.checkGuess();
-      } else if (this.isLost) {
-        this.restartAfterLost();
-      }
+      this.checkGuess();
     } else {
       this.nextRound();
     }
@@ -363,10 +350,6 @@ export class GuessScreenComponent implements OnInit, OnDestroy {
 
   get score() {
     return this.gameService.game.score;
-  }
-
-  get backgroundImage() {
-    return this.moreArtistData ? `url('${this.moreArtistData.image}')` : '';
   }
 
   get showArtistInput() {

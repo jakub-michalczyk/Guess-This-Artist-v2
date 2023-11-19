@@ -33,4 +33,8 @@ export class StartScreenComponent implements OnInit {
   startGame() {
     this.router.navigate(['/guess']);
   }
+
+  get playerLost() {
+    return this.gameService.game.lost
+  }
 }

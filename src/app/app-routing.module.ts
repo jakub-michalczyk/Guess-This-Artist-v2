@@ -5,12 +5,7 @@ import { GuessScreenResolver } from './components/guess-screen/guess-screen.reso
 import { StartScreenComponent } from './components/start-screen/start-screen.component';
 
 const routes: Routes = [
-  {
-    path: '',
-    redirectTo: '/start',
-    pathMatch: 'full',
-  },
-  { path: 'start', component: StartScreenComponent },
+  { path: '', component: StartScreenComponent },
   {
     path: 'guess',
     component: GuessScreenComponent,
@@ -18,7 +13,7 @@ const routes: Routes = [
       data: GuessScreenResolver,
     },
   },
-  { path: '**', redirectTo: '/start' },
+  { path: '**', redirectTo: '/' },
 ];
 
 @NgModule({

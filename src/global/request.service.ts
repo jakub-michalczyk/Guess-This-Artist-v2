@@ -55,6 +55,7 @@ export class RequestService {
           artist.genre?.includes(this.gameService.game.genre) &&
           artist.nationality === this.gameService.game.nationality
         ) {
+          this.saveArtistData(artist);
           return artist;
         } else {
           return undefined;
@@ -68,8 +69,15 @@ export class RequestService {
           artist.name.toLowerCase() ===
           this.gameService.game.artist.toLowerCase()
       )!;
+      this.saveArtistData(artistData);
     }
 
     return artistData;
+  }
+
+  saveArtistData(data: Artist) {
+    let game = this.gameService.game.currentGameData;
+    game.artist = data.name;
+    game.img = data.image;
   }
 }
